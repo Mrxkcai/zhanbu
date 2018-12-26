@@ -128,3 +128,8 @@ header button{
   margin: .25rem .2rem 0 0;
 }
 
+.click_up{
+  display: block;
+  width: .5rem;
+  margin: .2rem auto 0;
+}
