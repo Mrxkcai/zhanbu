@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>周易占卜</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+  <link rel="stylesheet" href="assets/component/footer/footer.css">
+</head>
+<body>
+      <div id="app" v-cloak>
+        <!-- 信息提示 -->
+        <header v-show="tips">
+            完善资料，定制您的专属运势
+            <button>
+                马上填写
+                <!-- <img src="" alt=""> -->
+                >
+            </button>
+        </header>
+
+
+        <!-- 背景 S -->
+            
+        <!-- 背景 E -->
+        <div class="container">
+            <!-- 2019 运势 -->
+            <div class="click_btn1"></div>
+            <!-- 吉日 查询 -->
+            <div class="click_btn2"></div>
+            <!-- 八字 算命 -->
+            <div class="click_btn3"></div>
+            <!-- 八字 合婚 -->
+            <div class="click_btn4"></div>
+            <!-- 一生 财运 -->
+            <div class="click_btn5"></div>
+            <!-- 缘分 测试 -->
+            <div class="click_btn6"></div>
+            <!-- 星座 测算 -->
+            <div class="click_btn7"></div>
+            <!-- 孕育 测算 -->
+            <div class="click_btn8"></div>
+        </div>
+
+
+        <!-- 热门测算 -->
+        <div class="popular">
+            <img src="" alt="">
+            <div class="popular_box">
+                <img src="assets/images/icon/hot.png" class="popular_hot" alt="">
+                <span class="popular_text">热门测算</span>
+            </div>
+
+            <div class="popular_title">
+                <span v-for='item,index in popularTitle'>{{item.name}}</span>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <component-footer ref="footer"></component-footer>
+      </div>
+</body>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="static/js/vue.min.js"></script>
+<script src="assets/component/footer/footer.js"></script>
+<script src="assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            tips:true,
+            popularTitle:[
+                {name:'塔罗牌算命'},
+                {name:'老黄历'},
+                {name:'周公解梦'},
+                {name:'事业运势'},
+                {name:'婚姻走势'},
+                {name:'健康测试'}
+            ]
+        },
+        methods:{
+
+        },
+        mounted(){
+            document.getElementById('app').style.height=window.innerHeight+'px'
+        }
+    })
+</script>
+</html>

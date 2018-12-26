@@ -1,0 +1,127 @@
+#app{
+  position: relative;
+  background: url('../images/icon/back.jpg');
+  background-size:100% 100%; 
+  overflow: hidden;
+}
+[v-cloak]{
+  display: none;
+}
+header {
+  width: 100%;
+  height: .8rem;
+  background: #b31c21;
+  font-size:.28rem;
+  font-family:FZS3JW--GB1-0;
+  font-weight:normal;
+  color:rgba(255,255,255,1);
+  line-height:.8rem;
+  /* -webkit-text-stroke:2px rgba(255,255,255,1);
+  text-stroke:2px rgba(255,255,255,1); */
+  text-indent: 1em;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+header button{
+  width:1.68rem;
+  height:.54rem;
+  background:rgba(255,255,255,1);
+  border-radius:.32rem;
+  float: right;
+  margin-top: .14rem;
+  margin-right: .3rem;
+  color: #B31C21;
+  font-size:.24rem;
+}
+.container{
+  width: 6.5rem;
+  height: 6.5rem;
+  margin: 1.36rem auto 0;
+  background: url('../images/icon/container.png');
+  background-size:100% 100%; 
+  position: relative;
+  /* border: 1px solid; */
+}
+.container>div{
+  position: absolute;
+  width: 1.16rem;
+  height: 1.16rem;
+  /* background: pink; */
+}
+.container>.click_btn1{
+  left: 50%;
+  margin-left: -.58rem;
+  top: 0;
+}
+.container>.click_btn2{
+  right: .8rem;
+  top:.72rem;
+}
+.container>.click_btn3{
+  right: 0rem;
+  top:2.66rem;
+}
+.container>.click_btn4{
+  right: 0.78rem;
+  top:4.58rem;
+}
+.container>.click_btn5{
+  left: 50%;
+  margin-left: -.58rem;
+  bottom: 0;
+}
+.container>.click_btn6{
+  left: 0.78rem;
+  top:4.58rem;
+}
+.container>.click_btn7{
+  left: 0rem;
+  top:2.66rem;
+}
+.container>.click_btn8{
+  left: .8rem;
+  top:.72rem;
+}
+.popular{
+  width: 100%;
+  height: 3rem;
+  background: #FFFFFF;
+  box-shadow:0px 12px 28px 0px rgba(82,30,15,0.3);
+  border-radius:.2rem .2rem 0 0;
+  position: absolute;
+  bottom: .98rem;
+  
+}
+.popular_box{
+  line-height: .5rem;
+}
+.popular_hot{
+  width: .42rem;
+  height: .36rem;
+  margin: 0 .1rem 0 .4rem;
+}
+.popular_text{
+  font-size:.28rem;
+  font-family:FZTYSJW--GB1-0;
+  font-weight:normal;
+  color:rgba(163,71,8,1);
+}
+.popular_title {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 .2rem;
+}
+.popular_title span{
+  height: 0.5rem;;
+  background:rgba(251,241,233,1);
+  border-radius:.24rem;
+  line-height: .5rem;
+  padding: 0 .3rem;
+  font-size:.24rem;
+  font-family:FZS3JW--GB1-0;
+  font-weight:normal;
+  color:rgba(163,71,8,1);
+  margin: .25rem .2rem 0 0;
+}
