@@ -38,6 +38,73 @@ header button{
   font-size:.24rem;
   border: none;
 }
+
+
+
+/* 用户详情
+ */
+.userInfo{
+  width: 100%;
+  background: #DEA470;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+}
+.userImg{
+  width: .84rem;
+  height: .84rem;
+  border-radius: 50%;
+  margin: .22rem .15rem 0.22rem .3rem;
+}
+.userInfo .userDetail{
+  display: flex;
+  flex-direction: column;
+}
+.userInfo .userDetail p:nth-child(1){
+  font-size:.32rem;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  margin: .3rem 0 0 0 ;
+}
+.userInfo .userDetail p:nth-child(2){
+  font-size:.24rem;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  margin: .2rem 0 0 0 ;
+}
+.userPercent{
+  display: flex;
+  flex-direction: column;
+}
+.userPercentBox{
+  width: .68rem;
+  height: .68rem;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size:.22rem;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(163,71,8,1);
+  position: relative;
+  text-align: center;
+  line-height: .68rem;
+  background: #fff;
+}
+.userPercentBox .userPercentNum{
+  width: 100%;
+  background: #FFCF54;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+
+
+
 .container{
   width: 6.5rem;
   height: 6.5rem;
@@ -89,13 +156,13 @@ header button{
 }
 .popular{
   width: 100%;
-  height: 3rem;
+  height: 2rem;
   background: #FFFFFF;
   box-shadow:0px 12px 28px 0px rgba(82,30,15,0.3);
   border-radius:.2rem .2rem 0 0;
   position: fixed;
   bottom: .98rem;
-  
+  transition: 0.3s;
 }
 .popular_box{
   line-height: .5rem;
@@ -121,7 +188,7 @@ header button{
   background:rgba(251,241,233,1);
   border-radius:.24rem;
   line-height: .5rem;
-  padding: 0 .3rem;
+  padding: 0 .25rem;
   font-size:.24rem;
   font-family:FZS3JW--GB1-0;
   font-weight:normal;

@@ -15,10 +15,26 @@
             完善资料，定制您的专属运势
             <button>
                 马上填写
-                <!-- <img src="" alt=""> -->
                 >
             </button>
         </header>
+
+        <!-- 用户详情 -->
+        <div class="userInfo" v-show='hasUserInfo'>
+            <img class="userImg" :src="userInfo.userImg" alt="">
+            <div class="userDetail">
+                <p>{{userInfo.userName}}</p>
+                <p>(农历）{{userInfo.birth}}</p>
+            </div>
+
+            <div class="userPercent">
+                <div class="userPercentBox">
+                    <div class="userPercentNum"></div>
+                    {{userInfo.num}}%
+                </div>
+                <p>综合运势</p>
+            </div>
+        </div>
 
         
 
@@ -46,8 +62,9 @@
 
 
         <!-- 热门测算 -->
-        <div class="popular">
-            <img src="../assets/images/icon/img_up.png" alt="图片" class="click_up" @click="toUp()">
+        <div class="popular" id="popular">
+            <img src="../assets/images/icon/img_up.png" alt="图片" v-show='isUp' class="click_up" @click="toUp()">
+            <img src="../assets/images/icon/img_up.png" alt="图片" v-show='!isUp'class="click_up" @click="toDown()">
             <div class="popular_box">
                 <img src="../assets/images/icon/hot.png" class="popular_hot" alt="">
                 <span class="popular_text">热门测算</span>
@@ -70,7 +87,9 @@
     var vm = new Vue({
         el:'#app',
         data:{
-            tips:true,
+            tips:true,  //是否填写信息
+            hasUserInfo:false, //是否展示个人信息
+            isUp:true,  //向上
             popularTitle:[
                 {name:'塔罗牌算命'},
                 {name:'老黄历'},
@@ -78,11 +97,27 @@
                 // {name:'事业运势'},
                 // {name:'婚姻走势'},
                 // {name:'健康测试'}
-            ]
+            ],
+            userInfo:{
+                userImg:'../assets/images/icon/xiaoacai.jpeg',
+                userName:'诸葛孔明',
+                birth:'1988年3月20日子时',
+                num:70
+            }
         },
         methods:{
+            //  点击上华
             toUp(){
-                
+                var elem = document.getElementById('popular');
+                elem.style.height = 250 + 'px';
+                this.isUp = !this.isUp;
+            },
+
+            //点击下滑
+            toDown(){
+                var elem = document.getElementById('popular');
+                elem.style.height = 2 + 'rem';
+                this.isUp = !this.isUp;
             }
         },
         mounted(){
