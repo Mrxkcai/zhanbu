@@ -74,10 +74,10 @@
             popularTitle:[
                 {name:'塔罗牌算命'},
                 {name:'老黄历'},
-                {name:'周公解梦'},
-                {name:'事业运势'},
-                {name:'婚姻走势'},
-                {name:'健康测试'}
+                // {name:'周公解梦'},
+                // {name:'事业运势'},
+                // {name:'婚姻走势'},
+                // {name:'健康测试'}
             ]
         },
         methods:{
@@ -86,7 +86,9 @@
             }
         },
         mounted(){
-            document.getElementById('app').style.height=window.innerHeight+'px'
+            document.getElementById('app').style.height=window.innerHeight+'px';
+            this.$refs.footer.footerList[0].active=true;
+            this.$refs.footer.footerList[0].img = '../assets/images/icon/shyeselect.png'
         }
     })
 </script>
