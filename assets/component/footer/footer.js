@@ -5,7 +5,14 @@ Vue.component('component-footer',{
 
     },
     data(){
-        
+        return{
+            footerList:[
+                {title:'首页',img:'../assets/images/icon/shyeunselect.png',active:false},
+                {title:'大师讲堂',img:'../assets/images/icon/shyeunselect.png',active:false},
+                {title:'祈福许愿',img:'../assets/images/icon/shyeunselect.png',active:false},
+                {title:'个人中心',img:'../assets/images/icon/shyeunselect.png',active:false}
+            ]
+        }
     },
     computed: {},
     methods:{
@@ -13,29 +20,9 @@ Vue.component('component-footer',{
     },
     template:`
         <footer class="footer">
-            <div>
-                <img src="../assets/images/icon/shyeselect.png" />
-                <span class="footer_select">
-                首页
-                </span>
-            </div>
-            <div>
-                <img src="../assets/images/icon/dashiunselect.png" />
-                <span>
-                大师讲堂
-                </span>
-            </div>
-            <div>
-                <img src="../assets/images/icon/qifuunselect.png" />
-                <span>
-                祈福许愿
-                </span>
-            </div>
-            <div>
-                <img src="../assets/images/icon/gerenunselect.png" />
-                <span>
-                个人中心
-                </span>
+            <div v-for="items in footerList">
+                <img :src="items.img" />
+                <span :class="items.active?'footer_select':''">{{items.title}}</span>
             </div>
         </footer>
     `

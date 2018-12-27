@@ -1,0 +1,22 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.header img{
+    display: block;
+    width: 100%;
+}
+.header p{
+    height: 0.8rem;
+    font-size: 0.26rem;
+    line-height: 0.8rem;
+    padding-left: 0.4rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid #EDEDED;
+}
