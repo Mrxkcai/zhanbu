@@ -12,7 +12,7 @@ Vue.component('component-footer',{
                 {title:'祈福许愿',img:'qifuunselect.png',active:false},
                 {title:'个人中心',img:'gerenunselect.png',active:false}
             ]
-        }
+        }   
     },
     computed: {},
     methods:{
