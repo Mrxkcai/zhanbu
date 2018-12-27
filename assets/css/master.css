@@ -6,6 +6,7 @@ body,html{
     width: 100%;
     height: auto;
     overflow: hidden;
+    color: #333;
 }
 
 .header img{
@@ -19,4 +20,112 @@ body,html{
     padding-left: 0.4rem;
     box-sizing: border-box;
     border-bottom: 1px solid #EDEDED;
+}
+.main{
+    width: 100%;
+    padding: 0 0.32rem;
+    box-sizing: border-box;
+}
+.main-like{
+    border-bottom: 1px solid #EDEDED;
+    margin-bottom: 0.1rem;
+}
+.title-h{
+    display: flex;
+    height: 1.16rem;
+    align-items: center;
+    justify-content:space-between;
+}
+.title-h h3{
+    display: block;
+    font-size: 0.32rem;
+    font-weight: bold;
+}
+.title-h span{
+    display: block;
+    color: #A3A1A1;
+    font-size: 0.28rem;
+    background: url("../images/masterPage/arrow.png") no-repeat center right;
+    background-size: 0.12rem 0.22rem;
+    padding-right: 0.28rem;
+}
+.like-list,.like-list-left,.count > div{
+    display: flex;
+}
+.like-list{
+    justify-content: space-between;
+    margin-bottom: 0.46rem;
+}
+.pic-box{
+    width: 1.14rem;
+    height: 1.14rem;
+    overflow: hidden;
+}
+.pic-box img{
+    display: block;
+    width: 100%;
+}
+.count{
+    width: 3.46rem;
+    margin-left: 0.3rem;
+}
+.count h6{
+    font-size: 0.32rem;
+    font-weight: bold;
+    margin-bottom: 0.14rem;
+}
+.count span{
+    font-size:0.22rem;
+    padding: 0.02rem 0.16rem;
+    border-radius: 0.3rem;
+    border:1px solid rgba(163,71,8,1);
+    margin-right: 0.14rem;
+}
+.count p{
+    line-height: 0.4rem;
+}
+.audition-bar{
+    width:1.26rem;
+    height:0.52rem;
+    background:rgba(222,164,112,1);
+    border-radius:0.26rem;
+    text-align: center;
+    line-height: 0.5rem;
+    color: #fff;
+}
+.like-list-ri span{
+    display: block;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #666262;
+    margin-top: 0.28rem;
+}
+.recommended{
+    padding-bottom: 1.6rem;
+}
+.recommended .title-h{
+    height: 1.1rem;
+}
+.master-list{
+    display: flex;
+    justify-content: space-between;
+}
+.master{
+    width: 1.18rem;
+}
+.master > div{
+    width: 1.08rem;
+    height: 1.08rem;
+    overflow: hidden;
+    border-radius: 1.08rem;
+}
+.master > div img{
+    display: block;
+    width: 100%;
+}
+.master span{
+    display: block;
+    text-align: center;
+    font-size: 0.28rem;
+    margin-top: 0.16rem;
 }
