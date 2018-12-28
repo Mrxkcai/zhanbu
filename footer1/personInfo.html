@@ -16,9 +16,48 @@
                 </div>
 
                 <div class="item item_name">
-                        <div class="title">姓 名</div> <i></i>
-                        <input type="text" />
+                        <div class="title">姓名</div> 
+                        <input type="text" placeholder="请填写姓名" />
                 </div>
+
+                <div class="item item_name">
+                        <div class="title">选择年份</div> 
+                        <div class="timeBox">
+                            <div class="chooseGong" @click="selectTime(1)">
+                                <div :class="{timeSelect:isTimeSelect}"></div>
+                                <span>公历</span>
+                            </div>
+                            <div class="chooseNong" @click="selectTime(2)">
+                                <div :class='{timeSelect:!isTimeSelect}'></div>
+                                <span>农历</span>
+                            </div>
+                        </div>
+                        
+                </div>
+
+                <div class="item item_name">
+                    <div class="title">出生时间</div> 
+                </div>
+
+                <div class="item item_name">
+                    <div class="title">性 别</div> 
+                        <div class="timeBox">
+                            <div class="chooseGong" @click="selectSex(1)">
+                                <div :class="{timeSelect:isSexSelect}"></div>
+                                <span>男 &nbsp;&nbsp;</span>
+                            </div>
+                            <div class="chooseNong" @click="selectSex(2)">
+                                <div :class='{timeSelect:!isSexSelect}'></div>
+                                <span>女</span>
+                            </div>
+                        </div>
+                        
+                </div>
+
+
+
+                <button class="seeLucky">查看个人运势</button>
+
             </div>
         </div>
     </div>
@@ -31,16 +70,32 @@
     var vm = new Vue({
         el:'#app',
         data:{
-
+            isTimeSelect:true,
+            isSexSelect:true
         },
         computed:{
 
         },
         methods:{
-
+            //选择公历还是农历
+            selectTime(type){
+                if(type == 1){
+                    this.isTimeSelect = true;
+                }else if(type == 2){
+                    this.isTimeSelect = false;
+                }
+            },
+            //选择性别
+            selectSex(type){
+                if(type == 1){
+                    this.isSexSelect = true;
+                }else if(type == 2){
+                    this.isSexSelect = false;
+                }
+            }
         },
         mounted(){
-            document.getElementById('app').style.height=window.innerHeight+'px';
+            document.getElementById('app').style.minHeight=window.innerHeight+'px';
         }
     })
 
