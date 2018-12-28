@@ -37,6 +37,7 @@ header button{
   color: #B31C21;
   font-size:.24rem;
   border: none;
+  outline: none;
 }
 
 
@@ -56,7 +57,7 @@ header button{
   width: .84rem;
   height: .84rem;
   border-radius: 50%;
-  margin: .22rem .15rem 0.22rem .3rem;
+  margin: .22rem .3rem 0.22rem .3rem;
 }
 .userInfo .userDetail{
   display: flex;
@@ -79,6 +80,12 @@ header button{
 .userPercent{
   display: flex;
   flex-direction: column;
+  margin-left:1.4rem; 
+}
+.userPercent p{
+  text-align: center;
+  color: #ffffff;
+  line-height: .4rem;
 }
 .userPercentBox{
   width: .68rem;
@@ -93,6 +100,13 @@ header button{
   text-align: center;
   line-height: .68rem;
   background: #fff;
+  margin: .1rem auto ;
+}
+.userPercentBox p{
+  width: 100%;
+  z-index: 1;color: #DEA470;position: absolute;
+  line-height: .68rem;
+  text-align: center;
 }
 .userPercentBox .userPercentNum{
   width: 100%;
@@ -100,6 +114,12 @@ header button{
   position: absolute;
   left: 0;
   bottom: 0;
+}
+.right_arrow{
+  width: .5rem;
+  height: .5rem;
+  float: right;
+  margin: .4rem 0rem 0 .2rem ;
 }
 
 

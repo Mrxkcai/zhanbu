@@ -13,7 +13,7 @@
         <!-- 信息提示 -->
         <header v-show="tips">
             完善资料，定制您的专属运势
-            <button>
+            <button @click='toEditPersonal()'>
                 马上填写
                 >
             </button>
@@ -29,11 +29,12 @@
 
             <div class="userPercent">
                 <div class="userPercentBox">
-                    <div class="userPercentNum"></div>
-                    {{userInfo.num}}%
+                    <div class="userPercentNum" id="userPercentNum"></div>
+                    <p>{{changeValue}}%</p>
                 </div>
                 <p>综合运势</p>
             </div>
+            <img class="right_arrow" src="../assets/images/icon/right_arrow.png" alt="">
         </div>
 
         
@@ -105,6 +106,12 @@
                 num:70
             }
         },
+        computed:{
+            changeValue:function(){
+                
+                return this.userInfo.num;
+            }
+        },
         methods:{
             //  点击上华
             toUp(){
@@ -118,12 +125,29 @@
                 var elem = document.getElementById('popular');
                 elem.style.height = 2 + 'rem';
                 this.isUp = !this.isUp;
+            },
+
+            //填写个人信息
+            toEditPersonal(){
+                window.location.href = './personInfo.html';
             }
+            
         },
         mounted(){
             document.getElementById('app').style.height=window.innerHeight+'px';
             this.$refs.footer.footerList[0].active=true;
-            this.$refs.footer.footerList[0].img = '../assets/images/icon/shyeselect.png'
+            this.$refs.footer.footerList[0].img = 'shyeselect.png';
+
+            var elem = document.getElementById('userPercentNum');
+                elem.style.height = 0.0068 * this.userInfo.num + 'rem';
+
+            if(isUserInfo('userInfo')){
+                this.tips = false;
+                this.hasUserInfo = true;
+            }else{
+                this.tips = true;
+                this.hasUserInfo = false;
+            }
         }
     })
 </script>

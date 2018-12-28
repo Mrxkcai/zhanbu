@@ -4,3 +4,13 @@ if (window.screen.availWidth <= 750) {
 } else {
     document.documentElement.style.fontSize = '100px';
 }
+
+//判断是否填写信息
+
+function isUserInfo(key){
+    if(localStorage.getItem(key)){
+        return localStorage.getItem(key);
+    }else{
+        return false;
+    }
+}

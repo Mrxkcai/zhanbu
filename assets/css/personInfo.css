@@ -1,0 +1,48 @@
+#app{
+    position: relative;
+    background: url('../images/icon/back.jpg');
+    background-size:100% 100%; 
+    overflow: hidden;
+  }
+  [v-cloak]{
+    display: none;
+  }
+
+  .outBox{
+      width: 6.84rem;
+      margin: .24rem auto;
+      background: url('../images/icon/edit_select.png');
+      background-size: 100% 100%;
+  }
+  .content{
+    width: 6.2rem;
+    margin:0 auto;
+  }
+  .item{
+      width: 100%;
+      height: 1.32rem;
+      border-bottom: 1px solid #D8AF6B;
+  }
+  .item .title{
+    width: 1.2rem;
+  }
+  .item_take{
+    font-size:.32rem;
+    font-family:PingFangSC-Semibold;
+    font-weight:600;
+    color:rgba(51,51,51,1);
+    line-height: 1.6rem;
+  }
+  .item_name{
+      /* display: flex;
+      flex-direction: row; */
+  }
+  .item_name .title{
+      display: inline-block;
+      font-size:.3rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(209,142,83,1);
+    line-height: 1.32rem;
+    text-align: justify;
+  }

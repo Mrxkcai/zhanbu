@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>个人基础信息</title>
+  <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/personInfo.css" />
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="outBox">
+            <div class="content">
+                <div class="item item_take">
+                        请填写个人信息
+                </div>
+
+                <div class="item item_name">
+                        <div class="title">姓 名</div> <i></i>
+                        <input type="text" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/component/footer/footer.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        computed:{
+
+        },
+        methods:{
+
+        },
+        mounted(){
+            document.getElementById('app').style.height=window.innerHeight+'px';
+        }
+    })
+
+</script>
+</html>
