@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/personCenter.css" />
+    <link rel="stylesheet" href="../assets/component/footer/footer.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <div class="content">
+            <div class="head-portrait"></div>
+            <div class="content-info">
+                <p>登录账号</p>
+                <p>学徒</p>
+            </div>
+        </div>
+        <div class="header-position">
+            <div class="header-position-fl">
+                <img src="../assets/images/centerPage/header-fl.png"/>
+                <div>
+                    <p>未上榜</p>
+                    <span>排行榜</span>
+                </div>
+            </div>
+            <div class="header-position-fr">
+                <img src="../assets/images/centerPage/header-fr.png"/>
+                <div>
+                    <p>0</p>
+                    <span>积分</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- cont -->
+    <div class="main">
+        <div class="content-list" v-for="(item,index) in contentList">
+            <div class="content-list-fl">
+                <img :src="'../assets/images/centerPage/icon_'+(index+1)+'.png'"/>
+                <p>{{item.text}}</p>
+            </div>
+            <div class="content-list-fr">
+                <img src="../assets/images/centerPage/arrow.png"/>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <component-footer ref="footer"></component-footer>
+</div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/component/footer/footer.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            contentList:[
+                {text:'我的订单'},
+                {text:'获取积分'},
+                {text:'信徒关系'},
+                {text:'设置'}
+            ]
+        },
+        methods:{
+
+        },
+        mounted(){
+            this.$refs.footer.footerList[3].active=true;
+            this.$refs.footer.footerList[3].img = 'gerenselect.png'
+        }
+    })
+</script>
+</html>

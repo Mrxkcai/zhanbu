@@ -10,7 +10,7 @@ Vue.component('component-footer',{
                 {title:'首页',img:'shyeunselect.png',active:false,pageUrl:'../footer1/index.html'},
                 {title:'大师讲堂',img:'dashiunselect.png',active:false,pageUrl:'../footer2/home.html'},
                 {title:'祈福许愿',img:'qifuunselect.png',active:false},
-                {title:'个人中心',img:'gerenunselect.png',active:false}
+                {title:'个人中心',img:'gerenunselect.png',active:false,pageUrl:'../footer4/personalCenter.html'}
             ]
         }   
     },

@@ -1,0 +1,127 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: auto;
+    /*overflow: hidden;*/
+    color: #333;
+}
+.header{
+    width: 100%;
+    height: 3.64rem;
+    background: url("../images/centerPage/center-bg.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+.content{
+    padding-top: 0.56rem;
+    box-sizing: border-box;
+}
+.content .head-portrait{
+    width: 1.44rem;
+    height: 1.44rem;
+    background: #E3AE7F;
+    border-radius: 1.44rem;
+    margin: 0 auto;
+}
+.content-info{
+    margin: 0.4rem auto 0;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+}
+.content-info p{
+    width: 1.3rem;
+    color: #90593A;
+    font-size: .32rem;
+    position: relative;
+    padding: 0 0.22rem;
+}
+.content-info p:first-child:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: #D8AF6B;
+}
+.header-position{
+    width: 6.76rem;
+    height: 1.36rem;
+    position: absolute;
+    left: 0.36rem;
+    bottom: -.78rem;
+    background: #fff;
+    box-shadow:2px 8px 16px 0px rgba(68,31,0,0.16);
+    border-radius:.2rem;
+    display: -webkit-box;
+    -webkit-box-align: center;
+}
+.header-position > div{
+    width: 1px;
+    height: .74rem;
+    -webkit-box-flex: 1;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    position: relative;
+}
+.header-position-fl:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: #D8AF6B;
+}
+.header-position > div img{
+    display: block;
+    width: 0.4rem;
+    margin: 0 .32rem 0 .58rem;
+}
+.header-position > div p{
+    font-size: .3rem;
+    font-weight: bold;
+    margin-bottom: 0.08rem;
+}
+.header-position > div span{
+    font-size: .24rem;
+    color: #A3A1A1;
+}
+
+.main{
+    width: 100%;
+    padding: 1.2rem .46rem 0;
+    box-sizing: border-box;
+}
+.content-list{
+    width: 100%;
+    height: 1.04rem;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    border-bottom: 1px solid #F0DAC7;
+}
+.content-list-fl{
+    font-size: .3rem;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+.content-list-fl img{
+    display: block;
+    width: .32rem;
+    margin: 0 .32rem 0 .16rem;
+}
+.content-list-fr{
+    width: .1rem;
+    margin-right: 0.28rem;
+}
+.content-list-fr img{
+    display: block;
+    width: .1rem;
+}
