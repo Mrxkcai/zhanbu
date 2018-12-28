@@ -112,14 +112,15 @@ body,html{
 }
 .master{
     width: 1.18rem;
+    position: relative;
 }
-.master > div{
+.master-info{
     width: 1.08rem;
     height: 1.08rem;
     overflow: hidden;
     border-radius: 1.08rem;
 }
-.master > div img{
+.master-info img{
     display: block;
     width: 100%;
 }
@@ -128,4 +129,17 @@ body,html{
     text-align: center;
     font-size: 0.28rem;
     margin-top: 0.16rem;
+}
+.tags{
+    width: .72rem;
+    height: .34rem;
+    background: url("../images/masterPage/WechatIMG2.png")no-repeat center center;
+    background-size: 100%;
+    position: absolute;
+    top: -.1rem;
+    right: -.23rem;
+    color: #fff;
+    text-align: center;
+    font-size: .2rem;
+    line-height: .3rem;
 }

@@ -45,10 +45,11 @@
             </div>
             <div class="master-list">
                 <div class="master" v-for="item in masterList">
-                    <div>
+                    <div class="master-info">
                         <img :src="'../assets/images/masterPage/'+item.imgSrc"/>
                     </div>
                     <span>{{item.name}}</span>
+                    <div v-show="item.tag" class="tags">婚恋</div>
                 </div>
             </div>
         </div>
@@ -71,9 +72,9 @@
                 {imgSrc:'courseImg3.png'}
             ],
             masterList:[
-                {imgSrc:'courseImg1.png',name:'费青元'},
+                {imgSrc:'courseImg1.png',name:'费青元',tag:'婚恋'},
                 {imgSrc:'courseImg2.png',name:'低才生'},
-                {imgSrc:'courseImg3.png',name:'于生一'},
+                {imgSrc:'courseImg3.png',name:'于生一',tag:'事业'},
                 {imgSrc:'courseImg3.png',name:'修道人'},
             ]
         },
