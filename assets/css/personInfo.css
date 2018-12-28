@@ -130,3 +130,9 @@
       background: url('../images/icon/edit_choose.png');
       background-size: 100% 100%;
   }
+  .vant_time_box{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }

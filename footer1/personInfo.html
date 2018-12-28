@@ -5,6 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>个人基础信息</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.4/lib/index.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/personInfo.css" />
 </head>
 <body>
@@ -37,6 +38,7 @@
 
                 <div class="item item_name">
                     <div class="title">出生时间</div> 
+                    
                 </div>
 
                 <div class="item item_name">
@@ -55,10 +57,21 @@
                 </div>
 
 
-
+                
                 <button class="seeLucky">查看个人运势</button>
-
+                
             </div>
+            
+        </div>
+        
+
+        <div class="vant_time_box">
+            <van-datetime-picker
+            v-model="currentDate"
+            type="datetime"
+            :min-date="minDate"
+            :max-date="maxDate"
+            />
         </div>
     </div>
 </body>
@@ -66,12 +79,18 @@
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
 <script src="../assets/js/util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@1.4/lib/vant.min.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
         data:{
             isTimeSelect:true,
-            isSexSelect:true
+            isSexSelect:true,
+            minHour: 10,
+            maxHour: 20,
+            minDate: new Date(1970, 1, 1),
+            maxDate: new Date(2119, 10, 1),
+            currentDate: new Date()
         },
         computed:{
 
@@ -92,6 +111,9 @@
                 }else if(type == 2){
                     this.isSexSelect = false;
                 }
+            },
+            openPicker() {
+                this.$refs.picker.open();
             }
         },
         mounted(){
