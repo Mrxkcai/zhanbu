@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>周易占卜</title>
+    <title>大师讲堂</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/master.css" />
     <link rel="stylesheet" href="../assets/component/footer/footer.css">
@@ -18,7 +18,7 @@
         <div class="main-like">
             <div class="title-h">
                 <h3>猜你感兴趣</h3>
-                <span>更多</span>
+                <span onclick="location.href='masterInfo.html'">更多</span>
             </div>
             <div class="like-list" v-for="item in likeList">
                 <div class="like-list-left">
@@ -27,8 +27,10 @@
                     </div>
                     <div class="count">
                         <h6>胡吹毛料</h6>
+                        <p>如何每天都能有桃 花运如何每天都能有桃</p>
                         <div>
-                            <p><span>开讲内容</span>如何每天都能有桃 花运如何每天都能有桃</p>
+                            <img src="../assets/images/masterPage/shiting.png"/>
+                            <label>450人正在学习</label>
                         </div>
                     </div>
                 </div>
@@ -49,7 +51,7 @@
                         <img :src="'../assets/images/masterPage/'+item.imgSrc"/>
                     </div>
                     <span>{{item.name}}</span>
-                    <div v-show="item.tag" class="tags">婚恋</div>
+                    <div v-show="item.tag" class="tags">{{item.tag}}</div>
                 </div>
             </div>
         </div>

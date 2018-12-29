@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>大师讲堂</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/masterInfo.css" />
+    <link rel="stylesheet" href="../assets/component/footer/footer.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="nav">
+        <label @click="handleTab(true)" :class="tableOneShow?'active':''">视频讲堂</label>
+        <label @click="handleTab(false)" :class="tableOneShow?'':'active'">广播讲堂</label>
+    </div>
+    <!-- cont -->
+    <div class="main">
+        <transition mode="out-in">
+        <div class="table-one" v-if="tableOneShow" key="one">
+            <div class="table-one-list">
+                <div class="list-header">
+                    <div class="list-header-fl">
+                        <div class="header-pic">
+                            <img src="../assets/images/masterPage/courseImg2.png"/>
+                        </div>
+                        <div class="header-introduction">
+                            <p>胡吹毛料大师</p>
+                            <span>终南山一级大师</span>
+                        </div>
+                    </div>
+                    <div class="list-header-fr">
+                        6789
+                    </div>
+                </div>
+                <div class="one-list-content">
+                    <video @click="handleVideo" class="video" src="http://www.runoob.com/try/demo_source/mov_bbb.mp4"></video>
+                    <div class="video-title">【八字算命】桃花运天天有</div>
+                </div>
+            </div>
+        </div>
+        <div class="table-two" v-else key="two">
+            <div class="like-list" v-for="item in likeList">
+                <div class="like-list-left">
+                    <div class="pic-box">
+                        <img :src="'../assets/images/masterPage/'+item.imgSrc"/>
+                    </div>
+                    <div class="count">
+                        <h6>胡吹毛料</h6>
+                        <p>如何每天都能有桃 花运如何每天都能有桃</p>
+                        <div>
+                            <img src="../assets/images/masterPage/shiting.png"/>
+                            <label>450人正在学习</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="like-list-ri">
+                    <div class="audition-bar">试听</div>
+                    <span>共14节</span>
+                </div>
+            </div>
+        </div>
+        </transition>
+    </div>
+</div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/component/footer/footer.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            likeList:[
+                {imgSrc:'courseImg1.png'},
+                {imgSrc:'courseImg2.png'},
+                {imgSrc:'courseImg3.png'}
+            ],
+            tableOneShow:true
+        },
+        methods:{
+            handleVideo(e){
+                e.path[0].play();
+            },
+            handleTab(show){
+                this.tableOneShow = show
+            }
+        },
+        mounted(){
+        }
+    })
+</script>
+</html>

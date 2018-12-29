@@ -32,11 +32,14 @@ body,html{
     -webkit-box-pack: center;
 }
 .content-info p{
-    width: 1.3rem;
+    width: 3rem;
     color: #90593A;
     font-size: .32rem;
     position: relative;
     padding: 0 0.22rem;
+}
+.content-info p:first-child{
+    text-align: end;
 }
 .content-info p:first-child:after{
     content: '';
