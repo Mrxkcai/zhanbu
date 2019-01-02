@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>八字合婚</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" href="../assets/css/iosSelect.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/iosSelect.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css" />
   <script>
     var _hmt = _hmt || [];
@@ -19,7 +19,52 @@
 </head>
 <body>
     <div id="app" v-cloak>
-        
+        <img class="marrage_title" src="../assets/images/marrage/marrage_title.png" alt="图片">
+
+        <div class="marrage_info">
+           <p class="marrage_basic_info">填写基本信息</p>
+
+           <div class="marrage_sex_man">
+                <span>男方信息</span>
+           </div>
+
+           <div class="marrage_man_info">
+                <div class="marrage_man_birth">
+                    <span class="marrage_man_name">&nbsp;&nbsp;男方姓名</span>
+                    <input type="text" placeholder="请输入姓名" v-model="manUser.name" />
+                </div>
+                <div class="marrage_man_birthday">
+                    <span class="marrage_man_name">&nbsp;&nbsp;生辰八字</span>
+                    <input type="text" placeholder="请选择生辰八字" />
+                </div>
+           </div>
+
+           <!-- 女方信息 S -->
+
+           <div class="marrage_sex_woman">
+                <span>女方信息</span>
+           </div>
+
+           <div class="marrage_woman_info">
+                <div class="marrage_woman_birth">
+                    <span class="marrage_woman_name">&nbsp;&nbsp;女方姓名</span>
+                    <input type="text" placeholder="请输入姓名" v-model="womanUser.name" />
+                </div>
+                <div class="marrage_woman_birthday">
+                    <span class="marrage_woman_name">&nbsp;&nbsp;生辰八字</span>
+                    <input type="text" placeholder="请选择生辰八字" />
+                </div>
+           </div>
+           <!-- 女方信息 E -->
+           
+
+
+           <!-- 测算按钮 S -->
+           <div class="estimate">
+                立即测算
+           </div>
+           <!-- 测算按钮 E -->
+        </div>
     </div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -31,7 +76,12 @@
     var vm = new Vue({
         el:'#app',
         data:{
-
+            manUser:{
+                name:'小菜'
+            },
+            womanUser:{
+                name:'小菜'
+            }
         },
         computed:{
 

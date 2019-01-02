@@ -1,3 +1,94 @@
 [v-cloak]{
     display: none;
   }
+#app{
+    background: url('../images/marrage/marrage_back.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.marrage_title{
+    display: block;
+    width: 6rem;
+    height: 3rem;
+    margin: .5rem auto 0;
+}
+
+.marrage_info{
+    width: 6.9rem;
+    min-height: 8.93rem;
+    margin: 0 auto;
+    background: url('../images/marrage/marage_wen.png');
+    background-size: 100% 100%;
+}
+.marrage_basic_info{
+    font-size:.3rem;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(209,142,83,1);
+    line-height:.42rem;
+    padding: .64rem 0 0 .72rem;
+}
+.marrage_sex_man,.marrage_sex_woman{
+    width: 5.5rem;
+    margin: 0 auto;
+    font-size:.3rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(209,142,83,1);
+    line-height:.2rem;
+    background: url('../images/marrage/marage_sex.png');
+    background-size:100% 100%; 
+    text-align: center;
+    background-repeat: no-repeat;
+    margin-top: .57rem;
+}
+.marrage_sex_man span,.marrage_sex_woman span{
+    display: inline-block;
+    margin-top: -.1rem;
+}
+.marrage_man_info,.marrage_woman_info{
+    width: 6.02rem;
+    height: 1.82rem;
+    margin: .36rem auto;
+    background: #ffffff;
+    border: 1px solid #D8AF6B;
+    clear: both;
+}
+.marrage_man_name,.marrage_woman_name{
+    display: inline-block;
+    font-size:.28rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(209,142,83,1);
+    line-height:.9rem;
+}
+.marrage_man_birth,.marrage_woman_birth{
+    border-bottom: 1px solid #D8AF6B;
+}
+.marrage_man_birth input,.marrage_woman_birth input,.marrage_man_birthday input,.marrage_woman_birthday input{
+    background: none;
+    text-indent: 2em;
+    font-size:.28rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+}
+.marrage_man_birthday,.marrage_woman_birthday{
+    background: url('../images/marrage/marrage_down.png');
+    background-position: 5.5rem .4rem;
+    background-repeat: no-repeat;
+    background-size: .3rem;
+}
+.estimate{
+    width:5.85rem;
+    height:.76rem;
+    background:rgba(221,51,53,1);
+    border-radius:.38rem;
+    font-size:.3rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(251,216,182,1);
+    line-height:.76rem;
+    text-align: center;
+    margin: .82rem auto;
+}
