@@ -133,6 +133,24 @@
   .vant_time_box{
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: -5.38rem;
     left: 0;
+    transition: .3s;
+  }
+  #showDate{
+    font-size:.3rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(163,161,161,1);
+    line-height: 1.32rem;
+    margin-left: .58rem;
+  }
+  #item_pickerTime{
+    position: relative;
+  }
+  #selectDate{
+    background: url('../images/icon/edit_down.png');
+    background-repeat:no-repeat;
+    background-position:right;  
+    background-size: .3rem;
   }
