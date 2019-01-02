@@ -65,7 +65,7 @@
 .marrage_man_birth,.marrage_woman_birth{
     border-bottom: 1px solid #D8AF6B;
 }
-.marrage_man_birth input,.marrage_woman_birth input,.marrage_man_birthday input,.marrage_woman_birthday input{
+.marrage_man_birth input,.marrage_woman_birth input{
     background: none;
     text-indent: 2em;
     font-size:.28rem;
@@ -79,6 +79,12 @@
     background-repeat: no-repeat;
     background-size: .3rem;
 }
+.marrage_man_birthday span:nth-child(2),.marrage_woman_birthday span:nth-child(2){
+    display: inline-block;
+    font-size: .28rem;
+    color: #333333;
+    text-indent: 2em;
+}
 .estimate{
     width:5.85rem;
     height:.76rem;
@@ -91,4 +97,7 @@
     line-height:.76rem;
     text-align: center;
     margin: .82rem auto;
+}
+.marrage_info .grayColor{
+    color: #999999!important;
 }
