@@ -1,4 +1,39 @@
 
 [v-cloak]{
     display: none;
-  }
+}
+#app{
+  overflow: hidden;
+}
+.master_search{
+  width: 6.88rem;
+  height: .72rem;
+  border-radius: .36rem;
+  margin: .22rem auto;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 4px 18px 0px rgba(79,80,86,0.12);
+}
+.master_search_icon{
+  width: .5rem;
+  height: .72rem;
+  float: left;
+  background: url('../images/icon/master_search.png');
+  background-repeat:no-repeat;
+  background-position: left; 
+  background-size: .35rem .35rem;
+  margin-left: .28rem;
+}
+.master_search input{
+  height: 100%;
+  float: left;
+}
+.master_search input::placeholder{
+  font-size:.26rem;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(222,164,112,1);
+}
+.master_select>div{
+  display: flex;
+  flex-direction: row;
+}
