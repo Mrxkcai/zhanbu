@@ -72,7 +72,58 @@
             </div>
 
             <div class="popular_title">
-                <span v-for='item,index in popularTitle'>{{item.name}}</span>
+                <!-- <span v-for='item,index in popularTitle'>{{item.name}}</span> -->
+                <table class="popular_table">
+                    <tr>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_taluopai.png" alt="">
+                                <span>塔罗牌占卜</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_huangli.png" alt="">
+                                <span>老黄历</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_zhougong.png" alt="">
+                                <span>周公解梦</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_shiye.png" alt="">
+                                <span>事业运势</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_hunyin.png" alt="">
+                                <span>婚姻走势</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_health.png" alt="">
+                                <span>健康测试</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="popular_hot_title">
+                                <img src="../assets/images/icon/popupar_shengxiao.png" alt="">
+                                <span>生肖测算</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
             </div>
         </div>
 
@@ -92,12 +143,13 @@
             hasUserInfo:false, //是否展示个人信息
             isUp:true,  //向上
             popularTitle:[
-                {name:'塔罗牌算命'},
-                {name:'老黄历'},
-                // {name:'周公解梦'},
-                // {name:'事业运势'},
-                // {name:'婚姻走势'},
-                // {name:'健康测试'}
+                {name:'塔罗牌占卜',img:'../assets/images/icon/popupar_taluopai.png'},
+                {name:'老黄历',img:'../assets/images/icon/popupar_huangli.png'},
+                {name:'周公解梦',img:'../assets/images/icon/popupar_zhougong.png'},
+                {name:'事业运势',img:'../assets/images/icon/popupar_shiye.png'},
+                {name:'婚姻走势',img:'../assets/images/icon/popupar_hunyin.png'},
+                {name:'健康测试',img:'../assets/images/icon/popupar_health.png'},
+                {name:'生肖测算',img:'../assets/images/icon/popupar_shengxiao.png'}
             ],
             userInfo:{
                 userImg:'../assets/images/icon/xiaoacai.jpeg',
