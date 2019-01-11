@@ -21,7 +21,7 @@
 
 <body>
     <div id="app" v-cloak>
-        <div v-show='!dataInfo'>
+        <div class="toggleBlock" v-show='!dataInfo'>
             <div class="select_box">
                 <div class="title">阴历出生日期</div>
                 <div class="form-item item-line" id="selectDate">
@@ -36,14 +36,14 @@
             <button class="select_btn" @click='characterCurrently()'>立即测算</button>
         </div>
 
-        <div v-show='dataInfo' class="dataInfo">
+        <div v-show='dataInfo' class="dataInfo toggleBlock">
             <div>
                 <span class="select_title">阴历出生日期</span>
-                <span class="select_bir">一一一一一一一一一</span>
+                <span class="select_bir">{{dataResult&&dataResult.lunar}}</span>
             </div>
             <div>
                 <span class="select_title">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;肖</span>
-                <span class="select_bir">羊</span>
+                <span class="select_bir">{{dataResult&&dataResult.zodiac}}</span>
             </div>
 
 
@@ -52,7 +52,7 @@
             </div>
 
             <div class="select_word">
-                
+                {{dataResult&&dataResult.horoscope}}
             </div>
         </div>
     </div>
@@ -70,7 +70,8 @@
         data: {
             dataInfo: false,        //是否填写信息
             id:null,                //url中获取参数
-            characterInfo:null
+            characterInfo:null,     //填写的信息
+            dataResult:null
         },
         computed:{},
         methods: {
@@ -92,6 +93,7 @@
                         if(res.code == 200){
                             console.log(JSON.parse(res.message))
                             that.dataInfo = true;
+                            that.dataResult = JSON.parse(res.message)
                             // console.log(this.dataInfo)   
                         }else{
 
