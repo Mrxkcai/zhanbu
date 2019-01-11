@@ -7,6 +7,7 @@
     <title>八字算命</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
     <link rel="stylesheet" href="../assets/css/iosSelect.css">
+    <link rel="stylesheet" href="../assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/CrazyCharacter.css" />
     <script>
         var _hmt = _hmt || [];
@@ -55,6 +56,9 @@
                 {{dataResult&&dataResult.horoscope}}
             </div>
         </div>
+
+
+        <div id="snackbar"></div>
     </div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -79,6 +83,7 @@
                 // console.log(this.characterInfo)
                 var that = this;
                 if(this.characterInfo == null){
+                    myFunction('snackbar','请选择您的出生日期');
                     return false
                 }
                 $.ajax({
@@ -91,7 +96,7 @@
                     success:function(res){
                         // console.log(res)
                         if(res.code == 200){
-                            console.log(JSON.parse(res.message))
+                            // console.log(JSON.parse(res.message))
                             that.dataInfo = true;
                             that.dataResult = JSON.parse(res.message)
                             // console.log(this.dataInfo)   
@@ -109,6 +114,7 @@
                 that.id = getUrlParam('id');
                 // console.log(that.id)
             }
+            
         },
         mounted() {
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';

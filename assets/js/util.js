@@ -66,3 +66,12 @@ function getUrlParam(name) {
 function tranformTow(number) {
   return number < 10 ? '0'+number:number
 }
+
+//消息提示
+function myFunction(name,txt){
+  var x = document.getElementById(name)
+  x.className = "show";
+  x.innerHTML = txt;
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+}
