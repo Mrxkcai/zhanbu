@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>八字算命</title>
-  <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" href="../assets/css/iosSelect.css">
-  <link rel="stylesheet" type="text/css" href="../assets/css/CrazyCharacter.css" />
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?b25bf95dd99f58452db28b1e99a1a46f";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>八字算命</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/iosSelect.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/CrazyCharacter.css" />
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?b25bf95dd99f58452db28b1e99a1a46f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
+
 <body>
     <div id="app" v-cloak>
-        <div class="select_box">
-            <div class="title">阴历出生日期</div> 
-            <div class="form-item item-line" id="selectDate">                     
-                <div class="pc-box">
-                    <span data-year="" data-month="" data-date="" id="showDate">请选择您的出生日期</span>
-                </div>             
+        <div v-show='!dataInfo'>
+            <div class="select_box">
+                <div class="title">阴历出生日期</div>
+                <div class="form-item item-line" id="selectDate">
+                    <div class="pc-box">
+                        <span data-year="" data-month="" data-date="" id="showDate">请选择您的出生日期</span>
+                    </div>
+                </div>
+                <img src="../assets/images/icon/edit_down.png" class="select_img" alt="">
             </div>
-            <img src="../assets/images/icon/edit_down.png" class="select_img" alt="">
+
+
+            <button class="select_btn" @click='characterCurrently()'>立即测算</button>
         </div>
 
+        <div v-show='dataInfo' class="dataInfo">
+            <div>
+                <span class="select_title">阴历出生日期</span>
+                <span class="select_bir">一一一一一一一一一</span>
+            </div>
+            <div>
+                <span class="select_title">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;肖</span>
+                <span class="select_bir">羊</span>
+            </div>
 
 
-        <button class="select_btn">立即测算</button>
+            <div class="select_reuslt">
+
+            </div>
+
+            <div class="select_word">
+                
+            </div>
+        </div>
     </div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -43,15 +66,51 @@
 
 <script>
     var vm = new Vue({
-        el:'#app',
-        data:{
-
+        el: '#app',
+        data: {
+            dataInfo: false,        //是否填写信息
+            id:null,                //url中获取参数
+            characterInfo:null
         },
-        methods:{
+        computed:{},
+        methods: {
+            characterCurrently(){
+                // console.log(this.characterInfo)
+                var that = this;
+                if(this.characterInfo == null){
+                    return false
+                }
+                $.ajax({
+                    url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        jsonParams:JSON.stringify(this.characterInfo)
+                    },
+                    success:function(res){
+                        // console.log(res)
+                        if(res.code == 200){
+                            console.log(JSON.parse(res.message))
+                            that.dataInfo = true;
+                            // console.log(this.dataInfo)   
+                        }else{
 
+                        }
+                    },
+                    error:function(){
+
+                    }
+                });
+            },
+            init(){
+                var that = this;
+                that.id = getUrlParam('id');
+                // console.log(that.id)
+            }
         },
-        mounted(){
-            document.getElementById('app').style.minHeight=window.innerHeight+'px';
+        mounted() {
+            document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            this.init();
         }
     })
 </script>
@@ -67,9 +126,9 @@
     showDateDom.attr('data-month', nowMonth);
     showDateDom.attr('data-date', nowDate);
     // 数据初始化
-    function formatYear (nowYear) {
+    function formatYear(nowYear) {
         var arr = [];
-        for (var i = nowYear - 200; i <= nowYear ; i++) {
+        for (var i = nowYear - 200; i <= nowYear; i++) {
             arr.push({
                 id: i + '',
                 value: i + '年'
@@ -77,7 +136,7 @@
         }
         return arr;
     }
-    function formatMonth () {
+    function formatMonth() {
         var arr = [];
         for (var i = 1; i <= 12; i++) {
             arr.push({
@@ -87,7 +146,7 @@
         }
         return arr;
     }
-    function formatDate (count) {
+    function formatDate(count) {
         var arr = [];
         for (var i = 1; i <= count; i++) {
             arr.push({
@@ -97,7 +156,7 @@
         }
         return arr;
     }
-    var yearData = function(callback) {
+    var yearData = function (callback) {
         callback(formatYear(nowYear))
     }
     var monthData = function (year, callback) {
@@ -111,7 +170,7 @@
             callback(formatDate(30));
         }
         else if (/^2$/.test(month)) {
-            if (year % 4 === 0 && year % 100 !==0 || year % 400 === 0) {
+            if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
                 callback(formatDate(29));
             }
             else {
@@ -122,9 +181,14 @@
             throw new Error('month is illegal');
         }
     };
-    var hourData = function(one, two, three, callback) {
+    var hourData = function (one, two, three, callback) {
         var hours = [];
-        var hourList = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥']
+        var hourList = [
+            '0', '1', '2', '3', '4', '5',
+             '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17',
+            '18', '19', '20', '21', '22', '23'
+            ]
         for (var i = 0; i < hourList.length; i++) {
             hours.push({
                 id: i,
@@ -154,8 +218,15 @@
                     showDateDom.attr('data-date', selectThreeObj.id);
                     showDateDom.attr('data-hour', selectFourObj.id);
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
+                    //付值
+                    vm.characterInfo = {
+                        date:selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id) ,
+                        hour:selectFourObj.id
+                    }
+
                 }
-        });
+            });
     });
 </script>
+
 </html>

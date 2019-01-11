@@ -47,3 +47,40 @@
     font-weight:400;
     color:rgba(254,242,233,1);
 }
+
+
+
+.dataInfo{
+    width: 5.5rem;
+    margin: 5.2rem auto 0;
+}
+.select_title{
+    font-size:.26rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:#666;
+    display:inline-block;
+    width: 2rem; 
+    justify-content: space-between; 
+    text-align: justify;
+    line-height: .7rem;
+}
+.select_bir{
+    color:#999;
+}
+.select_reuslt{
+    width: 4rem;
+    height: .7rem;
+    background: url('../images/marrage/select_result.png');
+    background-size: 100% 100%;
+    margin: .2rem auto;
+}
+.select_word{
+    width: 5.65rem;
+    margin: .38rem auto;
+    font-size:.24rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height: .4rem;
+}
