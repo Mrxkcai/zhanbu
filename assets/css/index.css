@@ -230,7 +230,6 @@ header button{
 .popular_hot_title span{
   display: inline-block;
   line-height: .9rem;
-  float: left;
 }
 
 .click_up{

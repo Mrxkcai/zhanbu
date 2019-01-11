@@ -1,0 +1,49 @@
+#app{
+    background: #F9F3ED;
+    background: url('../images/marrage/Character_back.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.select_box{
+    width: 6.01rem;
+    height: 1.6rem;
+    margin: 5.5rem auto 0;
+    background: url('../images/marrage/Character_border.png');
+    background-size: 100% 100%;
+}
+.title{
+    display: inline-block;
+    line-height: 1.5rem;
+    margin-left: .5rem;
+    font-size:.28rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+}
+.form-item{
+    display: inline-block;
+    line-height: 1.5rem;
+    margin-left: .5rem;
+    font-size:.28rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+}
+.select_img{
+    display: inline-block;
+    width: .2rem;
+    margin-left: .1rem;
+}
+.select_btn{
+    display: block;
+    width: 5.85rem;
+    height: .76rem;
+    background:rgba(127,87,65,1);
+    border-radius:.38rem;
+    margin: 2.13rem auto;
+    text-align: center;
+    font: size 0.3rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(254,242,233,1);
+}

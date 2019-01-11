@@ -48,9 +48,9 @@
             <!-- 吉日 查询 -->
             <div class="click_btn2"></div>
             <!-- 八字 算命 -->
-            <div class="click_btn3"></div>
+            <div class="click_btn3" @click='toNewPage(3)'></div>
             <!-- 八字 合婚 -->
-            <div class="click_btn4" @click='toMarrage()'></div>
+            <div class="click_btn4" @click='toNewPage(4)'></div>
             <!-- 一生 财运 -->
             <div class="click_btn5"></div>
             <!-- 缘分 测试 -->
@@ -185,12 +185,21 @@
             },
 
             //八字合婚
-            toMarrage(){
-                if(!isUserInfo('userInfo')){
-                    window.location.href = './personInfo.html';
-                }else{
-                    window.location.href = './marrage.html';
+            toNewPage(type){
+                if(type == 4){
+                    if(!isUserInfo('userInfo')){
+                        window.location.href = './personInfo.html';
+                    }else{
+                        window.location.href = './marrage.html';
+                    }
+                }else if(type == 3){
+                    if(!isUserInfo('userInfo')){
+                        window.location.href = './personInfo.html';
+                    }else{
+                        window.location.href = './CrazyCharacter.html';
+                    }
                 }
+                
                 
             }
             
