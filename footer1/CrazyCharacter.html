@@ -192,10 +192,11 @@
     var hourData = function (one, two, three, callback) {
         var hours = [];
         var hourList = [
-            '0', '1', '2', '3', '4', '5',
-             '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17',
-            '18', '19', '20', '21', '22', '23'
+            '子', '丑', '寅', '卯', '辰', '巳',
+             '午', '未', '申', '酉', '戌', '亥'
+            //  ,
+            // '12', '13', '14', '15', '16', '17',
+            // '18', '19', '20', '21', '22', '23'
             ]
         for (var i = 0; i < hourList.length; i++) {
             hours.push({
@@ -227,10 +228,13 @@
                     showDateDom.attr('data-hour', selectFourObj.id);
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
                     //付值
+                    
                     vm.characterInfo = {
                         date:selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id) ,
-                        hour:selectFourObj.id
+                        hour:selectFourObj.id * 2
                     }
+
+                    // console.log(vm.characterInfo)
 
                 }
             });
