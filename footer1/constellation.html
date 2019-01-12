@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>星座运势</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/constellation.css" />
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- cont -->
+    <div class="main">
+        <div class="imgList" v-for="item in imgList">
+            <img :src="'../assets/images/constellation/'+item.imgSrc"/>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <!--<component-footer ref="footer"></component-footer>-->
+</div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+        },
+        computed:{
+            imgList(){
+                let imgList = [];
+                for(let i=1;i<13;i++){
+                    imgList.push({imgSrc:'icon-'+i+'.png'})
+                }
+                return imgList
+            }
+        },
+        methods:{
+
+        },
+        mounted(){
+            console.log(this.imgList)
+        }
+    })
+</script>
+</html>

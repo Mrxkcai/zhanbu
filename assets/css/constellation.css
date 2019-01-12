@@ -1,0 +1,29 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/constellation/bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.main{
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 3.8rem;
+    padding-left: .6rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+.imgList{
+    width: 1.16rem;
+    margin-right: .56rem;
+    margin-bottom: .48rem;
+}
+.imgList img{
+    display: block;
+    width: 100%;
+}

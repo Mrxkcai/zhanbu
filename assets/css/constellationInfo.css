@@ -1,0 +1,24 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    color: #333;
+    background: #020207 url("../images/constellation/bg2.png") no-repeat;
+    background-size: 100%;
+}
+.header{
+    width: 2.54rem;
+    margin:0 auto;
+    padding-top: .48rem;
+}
+.header img{
+    display: block;
+    width: 100%;
+}
+
+.main{
+
+}
