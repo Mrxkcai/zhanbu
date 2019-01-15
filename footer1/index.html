@@ -172,6 +172,8 @@
                             this.categoryId = res.data[0].id
                             if(res.data[0].name == "八字算命查询接口"){
                                 window.location.href = './CrazyCharacter.html?id=' + this.categoryId;
+                            }else if(res.data[0].name == "星座运势"){
+                                window.location.href = './constellation.html?id=' + this.categoryId;
                             }
                             
                         }else{

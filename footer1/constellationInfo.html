@@ -5,33 +5,149 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>星座运势</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <!--<link rel="stylesheet" type="text/css" href="../static/js/need/layer.css" />-->
     <link rel="stylesheet" type="text/css" href="../assets/css/constellationInfo.css" />
 </head>
 <body>
 <div id="app" v-cloak>
     <div class="header">
         <img src="../assets/images/constellation/pic1.png"/>
-
+        <div class="header-progress">
+            <div>
+                <p :style="'width:'+ handleFateData[0]"></p>
+            </div>
+            <span>综合指数  {{handleFateData[0]}}</span>
+        </div>
     </div>
     <!-- cont -->
     <div class="main">
-
+        <div>
+            <label>幸运色</label>
+            <span>{{handleLucky[1]}}</span>
+        </div>
+        <div>
+            <label>健康指数</label>
+            <div class="main-progress">
+                <div><p :style="'width:'+ handleLucky[3]"></p></div>
+                <span>{{handleLucky[3]}}</span>
+            </div>
+        </div>
+        <div>
+            <label>爱情指数</label>
+            <div class="main-progress">
+                <div><p :style="'width:'+ handleFateData[1]"></p></div>
+                <span>{{handleFateData[1]}}</span>
+            </div>
+        </div>
+        <div>
+            <label>财运指数</label>
+            <div class="main-progress">
+                <div><p :style="'width:'+ handleFateData[3]"></p></div>
+                <span>{{handleFateData[3]}}</span>
+            </div>
+        </div>
+        <div>
+            <label>幸运数字</label>
+            <span>{{handleLucky[2]}}</span>
+        </div>
+        <div>
+            <label>速配星座</label>
+            <span>{{handleLucky[0]}}</span>
+        </div>
+        <div>
+            <label>今日概述</label>
+            <p>{{analysis}}</p>
+        </div>
+        <div>
+            <label>工作指数</label>
+            <div class="main-progress">
+                <div><p :style="'width:'+ handleFateData[2]"></p></div>
+                <span>{{handleFateData[2]}}</span>
+            </div>
+        </div>
     </div>
     <!-- 底部 -->
     <!--<component-footer ref="footer"></component-footer>-->
 </div>
 </body>
 <script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/util.js"></script>
+<script src="../static/js/layer.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
         data:{
+            analysis:'',
+            luckyObject:[],
+            fateData:[]
         },
         computed:{
+            handleLucky(){
+                return this.getCaption(this.luckyObject)
+            },
+            handleFateData(){
+                return this.getFateData(this.fateData)
+            }
         },
         methods:{
-
+            getCaption(obj){
+                let arry=[];
+                console.log(obj)
+                obj.forEach(function (v) {
+                    let index=v.lastIndexOf("：");
+                    arry.push(v.substring(index+1,v.length))
+                })
+                return arry;
+            },
+            getFateData(obj){
+                let arry=[];
+                obj.forEach(function (v) {
+                    arry.push(v.value.substring(0,1)/5*100+'%')
+                })
+                return arry
+            }
+        },
+        mounted(){
+            let that = this;
+            let jsonParams = {constellation:getUrlParam('desc')};
+            layer.open({
+                type:2,
+                content:'加载中~'
+            })
+            $.ajax({
+                url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                type:'get',
+                dataType:'json',
+                data:{
+                    jsonParams:JSON.stringify(jsonParams)
+                },
+                success:function(res){
+                    if(res.code == 200){
+                        console.log(JSON.parse(res.message))
+                        let message = JSON.parse(res.message)
+                        that.analysis = message.analysis;
+                        that.luckyObject = message.lucky_object;
+                        that.fateData = message.fate_data;
+                    }else{
+                        layer.open({
+                            content: '加载失败，请重试～'
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                        });
+                    }
+                    layer.closeAll();
+                },
+                error:function(error){
+                    console.log(error)
+                    layer.closeAll();
+                    layer.open({
+                        content: '加载失败，请重试～'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                }
+            });
         }
     })
 </script>
