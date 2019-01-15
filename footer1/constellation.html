@@ -11,8 +11,8 @@
 <div id="app" v-cloak>
     <!-- cont -->
     <div class="main">
-        <div class="imgList" v-for="item in imgList">
-            <img :src="'../assets/images/constellation/'+item.imgSrc"/>
+        <div class="imgList" v-for="(item,index) in imgList">
+            <img @click="getInfo(item.desc,index+1)" :src="'../assets/images/constellation/'+item.imgSrc"/>
         </div>
     </div>
     <!-- 底部 -->
@@ -20,26 +20,31 @@
 </div>
 </body>
 <script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/util.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
         data:{
+            desc:['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座']
         },
         computed:{
             imgList(){
                 let imgList = [];
                 for(let i=1;i<13;i++){
-                    imgList.push({imgSrc:'icon-'+i+'.png'})
+                    imgList.push({imgSrc:'icon-'+i+'.png',desc:this.desc[i-1]})
                 }
                 return imgList
             }
         },
         methods:{
-
+            getInfo(desc,index){
+                window.location.href = './constellationInfo.html?desc='+desc+'&id='+getUrlParam('id')+'&index='+index
+            }
         },
         mounted(){
             console.log(this.imgList)
+
         }
     })
 </script>
