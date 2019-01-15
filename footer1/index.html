@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>命理测算</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../assets/css/index.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.0" />
   <link rel="stylesheet" href="../assets/component/footer/footer.css">
 </head>
 <body>
@@ -59,7 +59,7 @@
             <!-- <div class="click_btn7"></div> -->
             <!-- 孕育 测算 -->
             <!-- <div class="click_btn8"></div> -->
-            
+
             <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
                 <div>
                     <p>{{item.name}}</p>
