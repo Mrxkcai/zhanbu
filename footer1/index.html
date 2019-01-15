@@ -185,18 +185,18 @@
             },
 
 
-            //占卜分类接口
+            //热门测算接口
             init(){
                 var that = this;
                 $.ajax({
                     url:baseUrl + 'small/program/api/category/list',
                     type:'get',
                     data:{
-                        hasHot:true,
-                        hasTop:true
+                        hasHot:true
                     },
                     success:function(res){
                         if(res.code == 200){
+                            // console.log(res)
                             that.popularTitle = res.data
                             that.popularerweiArr = arr(3,that.popularTitle);
                             // console.log(that.popularerweiArr)
@@ -210,12 +210,31 @@
                 });
 
                 
+            },
 
-                // var data = {
-                //     hasHot:true,
-                //     hasTop:true
-                // }
-                // console.log(getData('/small/program/api/category/list',data,'get'));
+            ////置顶接口
+            getHasTop(){
+                var that = this;
+                $.ajax({
+                    url:baseUrl + 'small/program/api/category/list',
+                    type:'get',
+                    data:{
+                        hasTop:true
+                    },
+                    success:function(res){
+                        if(res.code == 200){
+                            console.log(res)
+                            // that.popularTitle = res.data
+                            // that.popularerweiArr = arr(3,that.popularTitle);
+                            // console.log(that.popularerweiArr)
+                        }else{
+
+                        }
+                    },
+                    error:function(){
+
+                    }
+                });
             }
             
         },
@@ -238,6 +257,7 @@
 
             
             this.init();
+            this.getHasTop();
         }
     })
 </script>
