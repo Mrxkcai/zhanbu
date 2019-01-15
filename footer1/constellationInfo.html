@@ -11,7 +11,7 @@
 <body>
 <div id="app" v-cloak>
     <div class="header">
-        <img src="../assets/images/constellation/pic1.png"/>
+        <img :src="'../assets/images/constellation/pic'+picImg"/>
         <div class="header-progress">
             <div>
                 <p :style="'width:'+ handleFateData[0]"></p>
@@ -80,7 +80,13 @@
         data:{
             analysis:'',
             luckyObject:[],
-            fateData:[]
+            fateData:[],
+            picImg:'1.png'
+        },
+        created(){
+            //console.log(getUrlParam('index'))
+            this.picImg = getUrlParam('index')+'.png';
+            this.init()
         },
         computed:{
             handleLucky(){
@@ -106,48 +112,51 @@
                     arry.push(v.value.substring(0,1)/5*100+'%')
                 })
                 return arry
-            }
-        },
-        mounted(){
-            let that = this;
-            let jsonParams = {constellation:getUrlParam('desc')};
-            layer.open({
-                type:2,
-                content:'加载中~'
-            })
-            $.ajax({
-                url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
-                type:'get',
-                dataType:'json',
-                data:{
-                    jsonParams:JSON.stringify(jsonParams)
-                },
-                success:function(res){
-                    if(res.code == 200){
-                        console.log(JSON.parse(res.message))
-                        let message = JSON.parse(res.message)
-                        that.analysis = message.analysis;
-                        that.luckyObject = message.lucky_object;
-                        that.fateData = message.fate_data;
-                    }else{
+            },
+            init(){
+                let that = this;
+                let jsonParams = {constellation:getUrlParam('desc')};
+                layer.open({
+                    type:2,
+                    content:'加载中~'
+                })
+                $.ajax({
+                    url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        jsonParams:JSON.stringify(jsonParams)
+                    },
+                    success:function(res){
+                        if(res.code == 200){
+                            console.log(JSON.parse(res.message))
+                            let message = JSON.parse(res.message)
+                            that.analysis = message.analysis;
+                            that.luckyObject = message.lucky_object;
+                            that.fateData = message.fate_data;
+                        }else{
+                            layer.open({
+                                content: '加载失败，请重试～'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            });
+                        }
+                        layer.closeAll();
+                    },
+                    error:function(error){
+                        console.log(error)
+                        layer.closeAll();
                         layer.open({
                             content: '加载失败，请重试～'
                             ,skin: 'msg'
                             ,time: 2 //2秒后自动关闭
                         });
                     }
-                    layer.closeAll();
-                },
-                error:function(error){
-                    console.log(error)
-                    layer.closeAll();
-                    layer.open({
-                        content: '加载失败，请重试～'
-                        ,skin: 'msg'
-                        ,time: 2 //2秒后自动关闭
-                    });
-                }
-            });
+                });
+            }
+        },
+        mounted(){
+
         }
     })
 </script>

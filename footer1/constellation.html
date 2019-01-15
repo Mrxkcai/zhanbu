@@ -12,7 +12,7 @@
     <!-- cont -->
     <div class="main">
         <div class="imgList" v-for="(item,index) in imgList">
-            <img @click="getInfo(item.desc)" :src="'../assets/images/constellation/'+item.imgSrc"/>
+            <img @click="getInfo(item.desc,index+1)" :src="'../assets/images/constellation/'+item.imgSrc"/>
         </div>
     </div>
     <!-- 底部 -->
@@ -38,8 +38,8 @@
             }
         },
         methods:{
-            getInfo(desc){
-                window.location.href = './constellationInfo.html?desc='+desc+'&id='+getUrlParam('id')
+            getInfo(desc,index){
+                window.location.href = './constellationInfo.html?desc='+desc+'&id='+getUrlParam('id')+'&index='+index
             }
         },
         mounted(){
