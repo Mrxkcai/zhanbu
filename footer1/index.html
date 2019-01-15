@@ -44,21 +44,26 @@
         <!-- 背景 E -->
         <div class="container">
             <!-- 2019 运势 -->
-            <div class="click_btn1"></div>
+            <!-- <div class="click_btn1"></div> -->
             <!-- 吉日 查询 -->
-            <div class="click_btn2"></div>
+            <!-- <div class="click_btn2"></div> -->
             <!-- 八字 算命 -->
-            <div class="click_btn3" @click='toNewPage(3)'></div>
+            <!-- <div class="click_btn3" @click='toNewPage(3)'></div> -->
             <!-- 八字 合婚 -->
-            <div class="click_btn4" @click='toNewPage(4)'></div>
+            <!-- <div class="click_btn4" @click='toNewPage(4)'></div> -->
             <!-- 一生 财运 -->
-            <div class="click_btn5"></div>
+            <!-- <div class="click_btn5"></div> -->
             <!-- 缘分 测试 -->
-            <div class="click_btn6"></div>
+            <!-- <div class="click_btn6"></div> -->
             <!-- 星座 测算 -->
-            <div class="click_btn7"></div>
+            <!-- <div class="click_btn7"></div> -->
             <!-- 孕育 测算 -->
-            <div class="click_btn8"></div>
+            <!-- <div class="click_btn8"></div> -->
+            <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
+                <div>
+                    <p>{{item.name}}</p>
+                </div>
+            </div>
         </div>
 
 
@@ -80,7 +85,7 @@
                     <tr v-for='item,index in popularerweiArr'>
                         <td v-for='list,index in item' @click='toDetailPage(list.id)'>
                             <div class="popular_hot_title">
-                                <img :src="list.img?list.img:''" alt="">
+                                <img :src="list.picUrl?baseImgUrl + list.picUrl:''" alt="">
                                 <span>{{list.name}}</span>
                             </div>
                         </td>
@@ -92,6 +97,11 @@
 
         <!-- 底部 -->
         <component-footer ref="footer"></component-footer>
+
+        <!-- 消息提示 S-->
+        <div id="snackbar"></div>
+        <!-- 消息提示 E-->
+
       </div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -114,7 +124,8 @@
                 userName:'诸葛孔明',
                 birth:'1988年3月20日子时',
                 num:70
-            }
+            },
+            getHasTopList:[]       //获取置顶的八个图标
         },
         computed:{
             changeValue:function(){
@@ -142,13 +153,14 @@
                 window.location.href = './personInfo.html';
             },
 
-            //八字合婚
+            //点击罗盘
             toNewPage(type){
-                if(type == 4){
+                // console.log(type)
+                if(type == 1){
                     if(!isUserInfo('userInfo')){
                         window.location.href = './personInfo.html';
                     }else{
-                        window.location.href = './marrage.html';
+                        window.location.href = './CrazyCharacter.html';
                     }
                 }else if(type == 3){
                     if(!isUserInfo('userInfo')){
@@ -170,6 +182,12 @@
                         if(res.code == 200){
                             console.log(res)
                             this.categoryId = res.data[0].id
+                            if(!isUserInfo('userInfo')){
+                                window.location.href = './personInfo.html';
+                                return false;
+                            }
+
+
                             if(res.data[0].name == "八字算命查询接口"){
                                 window.location.href = './CrazyCharacter.html?id=' + this.categoryId;
                             }else if(res.data[0].name == "星座运势"){
@@ -226,11 +244,15 @@
                     success:function(res){
                         if(res.code == 200){
                             console.log(res)
-                            // that.popularTitle = res.data
-                            // that.popularerweiArr = arr(3,that.popularTitle);
-                            // console.log(that.popularerweiArr)
-                        }else{
+                            if(res.data.length > 0){
+                                that.getHasTopList = res.data;
 
+                            }else{
+
+                            }
+
+                        }else{
+                            myFunction('snackbar','请求失败')
                         }
                     },
                     error:function(){

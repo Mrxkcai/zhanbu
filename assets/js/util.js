@@ -18,6 +18,7 @@ function isUserInfo(key){
 
 
   var baseUrl = 'https://wxcs.nuoweibd.com/augury/';
+  var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
   function getData(url,params,type){
     
       // if(type == 'get'){
