@@ -182,17 +182,24 @@
                     success:function(res){
                         if(res.code == 200){
                             console.log(res)
-                            this.categoryId = res.data[0].id
+                            
+                            
                             if(!isUserInfo('userInfo')){
                                 window.location.href = './personInfo.html';
                                 return false;
                             }
-
+                            
+                            if(!res.data[0]){
+                                return false;
+                            }   
+                            this.categoryId = res.data[0].id
 
                             if(res.data[0].name == "八字算命查询接口"){
                                 window.location.href = './CrazyCharacter.html?id=' + this.categoryId;
                             }else if(res.data[0].name == "星座运势"){
                                 window.location.href = './constellation.html?id=' + this.categoryId;
+                            }else if(res.data[0].name == "八字合婚"){
+                                window.location.href = './marrage.html?id=' + this.categoryId;
                             }
                             
                         }else{
