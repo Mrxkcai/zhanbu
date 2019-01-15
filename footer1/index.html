@@ -59,6 +59,7 @@
             <!-- <div class="click_btn7"></div> -->
             <!-- 孕育 测算 -->
             <!-- <div class="click_btn8"></div> -->
+            
             <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
                 <div>
                     <p>{{item.name}}</p>
