@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2019运势</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <style>
+        #app{
+            width: 100%;
+            padding: 0 .4rem;
+            box-sizing: border-box;
+        }
+        img{
+            display: block;
+            width: 80%;
+            margin: .1rem auto;
+        }
+        p{
+            line-height: .46rem;
+            font-size: .28rem;
+            padding-bottom: .2rem;
+            /*text-indent: 2em;*/
+            text-align: justify;
+        }
+        h6{
+            font-weight: 600;
+            font-size: .32rem;
+            margin: .2rem 0;
+        }
+        h1{
+            text-align: center;
+            padding: .3rem;
+            font-weight: 600;
+            font-size: .42rem;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak v-html="msg">
+
+</div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../static/js/mock.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:''
+        },
+        created(){
+            var _index = getUrlParam('type')-1;
+            this.msg = zodiac[_index].msg
+        },
+        methods:{
+
+        },
+        mounted(){
+
+        }
+    })
+</script>
+</html>

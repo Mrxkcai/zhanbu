@@ -1,212 +1,214 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>命理测算</title>
-  <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.0" />
-  <link rel="stylesheet" href="../assets/component/footer/footer.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>命理测算</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.0"/>
+    <link rel="stylesheet" href="../assets/component/footer/footer.css">
 </head>
 <body>
-      <div id="app" v-cloak>
-        <!-- 信息提示 -->
-        <header v-show="tips">
-            完善资料，定制您的专属运势
-            <button @click='toEditPersonal()'>
-                马上填写
-                >
-            </button>
-        </header>
+<div id="app" v-cloak>
+    <!-- 信息提示 -->
+    <header v-show="tips">
+        完善资料，定制您的专属运势
+        <button @click='toEditPersonal()'>
+            马上填写
+            >
+        </button>
+    </header>
 
-        <!-- 用户详情 -->
-        <div class="userInfo" v-show='hasUserInfo'>
-            <img class="userImg" :src="userInfo.userImg" alt="">
-            <div class="userDetail">
-                <p>{{userInfo.userName}}</p>
-                <p>(农历）{{userInfo.birth}}</p>
-            </div>
-
-            <div class="userPercent">
-                <div class="userPercentBox">
-                    <div class="userPercentNum" id="userPercentNum"></div>
-                    <p>{{changeValue}}%</p>
-                </div>
-                <p>综合运势</p>
-            </div>
-            <img class="right_arrow" src="../assets/images/icon/right_arrow.png" alt="">
+    <!-- 用户详情 -->
+    <div class="userInfo" v-show='hasUserInfo'>
+        <img class="userImg" :src="userInfo.userImg" alt="">
+        <div class="userDetail">
+            <p>{{userInfo.userName}}</p>
+            <p>(农历）{{userInfo.birth}}</p>
         </div>
 
-        
+        <div class="userPercent">
+            <div class="userPercentBox">
+                <div class="userPercentNum" id="userPercentNum"></div>
+                <p>{{changeValue}}%</p>
+            </div>
+            <p>综合运势</p>
+        </div>
+        <img class="right_arrow" src="../assets/images/icon/right_arrow.png" alt="">
+    </div>
 
-        <!-- 背景 S -->
-            
-        <!-- 背景 E -->
-        <div class="container">
-            <!-- 2019 运势 -->
-            <!-- <div class="click_btn1"></div> -->
-            <!-- 吉日 查询 -->
-            <!-- <div class="click_btn2"></div> -->
-            <!-- 八字 算命 -->
-            <!-- <div class="click_btn3" @click='toNewPage(3)'></div> -->
-            <!-- 八字 合婚 -->
-            <!-- <div class="click_btn4" @click='toNewPage(4)'></div> -->
-            <!-- 一生 财运 -->
-            <!-- <div class="click_btn5"></div> -->
-            <!-- 缘分 测试 -->
-            <!-- <div class="click_btn6"></div> -->
-            <!-- 星座 测算 -->
-            <!-- <div class="click_btn7"></div> -->
-            <!-- 孕育 测算 -->
-            <!-- <div class="click_btn8"></div> -->
 
-            <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
-                <div>
-                    <p>{{item.name}}</p>
-                </div>
+    <!-- 背景 S -->
+
+    <!-- 背景 E -->
+    <div class="container">
+        <!-- 2019 运势 -->
+        <!-- <div class="click_btn1"></div> -->
+        <!-- 吉日 查询 -->
+        <!-- <div class="click_btn2"></div> -->
+        <!-- 八字 算命 -->
+        <!-- <div class="click_btn3" @click='toNewPage(3)'></div> -->
+        <!-- 八字 合婚 -->
+        <!-- <div class="click_btn4" @click='toNewPage(4)'></div> -->
+        <!-- 一生 财运 -->
+        <!-- <div class="click_btn5"></div> -->
+        <!-- 缘分 测试 -->
+        <!-- <div class="click_btn6"></div> -->
+        <!-- 星座 测算 -->
+        <!-- <div class="click_btn7"></div> -->
+        <!-- 孕育 测算 -->
+        <!-- <div class="click_btn8"></div> -->
+
+        <div class="click_btn" v-for="item, index in getHasTopList"
+             :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}"
+             :key='item.orders' @click='toDetailPage(item.id)'>
+            <div>
+                <p>{{item.name}}</p>
             </div>
         </div>
+    </div>
 
 
-        <!-- 热门测算 -->
-        <div class="popular" id="popular">
-            <img src="../assets/images/icon/img_up.png" alt="图片" v-show='isUp' class="click_up" @click="toUp()">
-            <img src="../assets/images/icon/img_up.png" alt="图片" v-show='!isUp'class="click_up" @click="toDown()">
-            <div class="popular_box">
-                <img src="../assets/images/icon/hot.png" class="popular_hot" alt="">
-                <span class="popular_text">热门测算</span>
-            </div>
-
-            <div class="popular_title">
-                <!-- <span class="popular_remen" v-for='item,index in popularTitle'>
-                    <img src="../assets/images/icon/xiaoacai.jpeg" alt="">
-                    {{item.name}}
-                </span> -->
-                <table class="popular_table">
-                    <tr v-for='item,index in popularerweiArr'>
-                        <td v-for='list,index in item' @click='toDetailPage(list.id)'>
-                            <div class="popular_hot_title">
-                                <img :src="list.picUrl?baseImgUrl + list.picUrl:''" alt="">
-                                <span>{{list.name}}</span>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                
-            </div>
+    <!-- 热门测算 -->
+    <div class="popular" id="popular">
+        <img src="../assets/images/icon/img_up.png" alt="图片" v-show='isUp' class="click_up" @click="toUp()">
+        <img src="../assets/images/icon/img_up.png" alt="图片" v-show='!isUp' class="click_up" @click="toDown()">
+        <div class="popular_box">
+            <img src="../assets/images/icon/hot.png" class="popular_hot" alt="">
+            <span class="popular_text">热门测算</span>
         </div>
 
-        <!-- 底部 -->
-        <component-footer ref="footer"></component-footer>
+        <div class="popular_title">
+            <!-- <span class="popular_remen" v-for='item,index in popularTitle'>
+                <img src="../assets/images/icon/xiaoacai.jpeg" alt="">
+                {{item.name}}
+            </span> -->
+            <table class="popular_table">
+                <tr v-for='item,index in popularerweiArr'>
+                    <td v-for='list,index in item' @click='toDetailPage(list.id)'>
+                        <div class="popular_hot_title">
+                            <img :src="list.picUrl?baseImgUrl + list.picUrl:''" alt="">
+                            <span>{{list.name}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-        <!-- 消息提示 S-->
-        <div id="snackbar"></div>
-        <!-- 消息提示 E-->
+        </div>
+    </div>
 
-      </div>
+    <!-- 底部 -->
+    <component-footer ref="footer"></component-footer>
+
+    <!-- 消息提示 S-->
+    <div id="snackbar"></div>
+    <!-- 消息提示 E-->
+
+</div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
+<script src="../static/js/mock.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
 <script src="../assets/js/util.js?v=1.0.0"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
-        el:'#app',
-        data:{
-            tips:true,  //是否填写信息
-            hasUserInfo:false, //是否展示个人信息
-            isUp:true,  //向上
-            popularTitle:null,
-            popularerweiArr:null,
-            categoryId:null,
-            userInfo:{
-                userImg:'../assets/images/icon/xiaoacai.jpeg',
-                userName:'诸葛孔明',
-                birth:'1988年3月20日子时',
-                num:70
+        el: '#app',
+        data: {
+            tips: true,  //是否填写信息
+            hasUserInfo: false, //是否展示个人信息
+            isUp: true,  //向上
+            popularTitle: null,
+            popularerweiArr: null,
+            categoryId: null,
+            userInfo: {
+                userImg: '../assets/images/icon/xiaoacai.jpeg',
+                userName: '诸葛孔明',
+                birth: '1988年3月20日子时',
+                num: 70
             },
-            getHasTopList:[]       //获取置顶的八个图标
+            getHasTopList: []       //获取置顶的八个图标
         },
-        computed:{
-            changeValue:function(){
-                
+        computed: {
+            changeValue: function () {
+
                 return this.userInfo.num;
             }
         },
-        methods:{
+        methods: {
             //  点击上华
-            toUp(){
+            toUp() {
                 var elem = document.getElementById('popular');
                 elem.style.height = 250 + 'px';
                 this.isUp = !this.isUp;
             },
 
             //点击下滑
-            toDown(){
+            toDown() {
                 var elem = document.getElementById('popular');
                 elem.style.height = 2 + 'rem';
                 this.isUp = !this.isUp;
             },
 
             //填写个人信息
-            toEditPersonal(){
+            toEditPersonal() {
                 window.location.href = './personInfo.html';
             },
 
             //点击罗盘
-            toNewPage(type){
+            toNewPage(type) {
                 // console.log(type)
-                if(type == 1){
-                    if(!isUserInfo('userInfo')){
+                if (type == 1) {
+                    if (!isUserInfo('userInfo')) {
                         window.location.href = './personInfo.html';
-                    }else{
+                    } else {
                         window.location.href = './CrazyCharacter.html';
                     }
-                }else if(type == 3){
-                    if(!isUserInfo('userInfo')){
+                } else if (type == 3) {
+                    if (!isUserInfo('userInfo')) {
                         window.location.href = './personInfo.html';
-                    }else{
+                    } else {
                         window.location.href = './CrazyCharacter.html';
                     }
                 }
-                
-                
+
+
             },
-            
+
             //点击热门测算
-            toDetailPage(id){
+            toDetailPage(id) {
                 $.ajax({
-                    url:baseUrl + 'small/program/api/augury/list/' + id,
-                    type:'get',
-                    success:function(res){
-                        if(res.code == 200){
+                    url: baseUrl + 'small/program/api/augury/list/' + id,
+                    type: 'get',
+                    success: function (res) {
+                        if (res.code == 200) {
                             console.log(res)
-                            
-                            
-                            if(!isUserInfo('userInfo')){
+
+
+                            if (!isUserInfo('userInfo')) {
                                 window.location.href = './personInfo.html';
                                 return false;
                             }
-                            
-                            if(!res.data[0]){
+
+                            if (!res.data[0]) {
                                 return false;
-                            }   
+                            }
                             this.categoryId = res.data[0].id
 
-                            if(res.data[0].name == "八字算命查询接口"){
+                            if (res.data[0].name == "八字算命查询接口") {
                                 window.location.href = './CrazyCharacter.html?id=' + this.categoryId;
-                            }else if(res.data[0].name == "星座运势"){
+                            } else if (res.data[0].name == "星座运势") {
                                 window.location.href = './constellation.html?id=' + this.categoryId;
-                            }else if(res.data[0].name == "八字合婚"){
+                            } else if (res.data[0].name == "八字合婚") {
                                 window.location.href = './marrage.html?id=' + this.categoryId;
                             }
-                            
-                        }else{
+
+                        } else {
 
                         }
                     },
-                    error:function(){
+                    error: function () {
 
                     }
                 });
@@ -214,80 +216,82 @@
 
 
             //热门测算接口
-            init(){
+            init() {
                 var that = this;
                 $.ajax({
-                    url:baseUrl + 'small/program/api/category/list',
-                    type:'get',
-                    data:{
-                        hasHot:true
+                    url: baseUrl + 'small/program/api/category/list',
+                    type: 'get',
+                    data: {
+                        hasHot: true
                     },
-                    success:function(res){
-                        if(res.code == 200){
+                    success: function (res) {
+                        if (res.code == 200) {
                             // console.log(res)
                             that.popularTitle = res.data
-                            that.popularerweiArr = arr(3,that.popularTitle);
+                            that.popularerweiArr = arr(3, that.popularTitle);
                             // console.log(that.popularerweiArr)
-                        }else{
+                        } else {
 
                         }
                     },
-                    error:function(){
+                    error: function () {
 
                     }
                 });
 
-                
+
             },
 
             ////置顶接口
-            getHasTop(){
+            getHasTop() {
                 var that = this;
                 $.ajax({
-                    url:baseUrl + 'small/program/api/category/list',
-                    type:'get',
-                    data:{
-                        hasTop:true
+                    url: baseUrl + 'small/program/api/category/list',
+                    type: 'get',
+                    data: {
+                        hasTop: true
                     },
-                    success:function(res){
-                        if(res.code == 200){
+                    success: function (res) {
+                        if (res.code == 200) {
                             console.log(res)
-                            if(res.data.length > 0){
+                            if (res.data.length > 0) {
                                 that.getHasTopList = res.data;
 
-                            }else{
+                            } else {
 
                             }
 
-                        }else{
-                            myFunction('snackbar','请求失败')
+                        } else {
+                            myFunction('snackbar', '请求失败')
                         }
                     },
-                    error:function(){
+                    error: function () {
 
                     }
                 });
             }
-            
+
         },
-        mounted(){
-            
-            document.getElementById('app').style.minHeight=window.innerHeight+'px';
-            this.$refs.footer.footerList[0].active=true;
+        mounted() {
+            console.log(zodiac)
+            $('#popular').append(zodiac[0].title)
+            document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            this.$refs.footer.footerList[0].active = true;
             this.$refs.footer.footerList[0].img = 'shyeselect.png';
 
             var elem = document.getElementById('userPercentNum');
-                elem.style.height = 0.0068 * this.userInfo.num + 'rem';
+            elem.style.height = 0.0068 * this.userInfo.num + 'rem';
 
-            if(isUserInfo('userInfo')){
+            if (isUserInfo('userInfo')) {
                 this.tips = false;
                 this.hasUserInfo = true;
-            }else{
+            } else {
                 this.tips = true;
                 this.hasUserInfo = false;
-            };
+            }
+            ;
 
-            
+
             this.init();
             this.getHasTop();
         }

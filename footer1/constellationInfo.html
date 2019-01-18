@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>星座运势</title>
-    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css"/>
     <!--<link rel="stylesheet" type="text/css" href="../static/js/need/layer.css" />-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/constellationInfo.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/constellationInfo.css"/>
 </head>
 <body>
 <div id="app" v-cloak>
@@ -76,86 +76,86 @@
 <script src="../static/js/layer.js"></script>
 <script>
     var vm = new Vue({
-        el:'#app',
-        data:{
-            analysis:'',
-            luckyObject:[],
-            fateData:[],
-            picImg:'1.png'
+        el: '#app',
+        data: {
+            analysis: '',
+            luckyObject: [],
+            fateData: [],
+            picImg: '1.png'
         },
-        created(){
+        created() {
             //console.log(getUrlParam('index'))
-            this.picImg = getUrlParam('index')+'.png';
+            this.picImg = getUrlParam('index') + '.png';
             this.init()
         },
-        computed:{
-            handleLucky(){
+        computed: {
+            handleLucky() {
                 return this.getCaption(this.luckyObject)
             },
-            handleFateData(){
+            handleFateData() {
                 return this.getFateData(this.fateData)
             }
         },
-        methods:{
-            getCaption(obj){
-                let arry=[];
+        methods: {
+            getCaption(obj) {
+                let arry = [];
                 console.log(obj)
                 obj.forEach(function (v) {
-                    let index=v.lastIndexOf("：");
-                    arry.push(v.substring(index+1,v.length))
+                    let index = v.lastIndexOf("：");
+                    arry.push(v.substring(index + 1, v.length))
                 })
                 return arry;
             },
-            getFateData(obj){
-                let arry=[];
+            getFateData(obj) {
+                let arry = [];
                 obj.forEach(function (v) {
-                    arry.push(v.value.substring(0,1)/5*100+'%')
+                    arry.push(v.value.substring(0, 1) / 5 * 100 + '%')
                 })
                 return arry
             },
-            init(){
+            init() {
                 let that = this;
-                let jsonParams = {constellation:getUrlParam('desc')};
+                let jsonParams = {constellation: getUrlParam('desc')};
                 layer.open({
-                    type:2,
-                    content:'加载中~'
+                    type: 2,
+                    content: '加载中~'
                 })
                 $.ajax({
-                    url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        jsonParams:JSON.stringify(jsonParams)
+                    url: baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        jsonParams: JSON.stringify(jsonParams)
                     },
-                    success:function(res){
-                        if(res.code == 200){
+                    success: function (res) {
+                        if (res.code == 200) {
                             console.log(JSON.parse(res.message))
                             let message = JSON.parse(res.message)
                             that.analysis = message.analysis;
                             that.luckyObject = message.lucky_object;
                             that.fateData = message.fate_data;
-                        }else{
+                        } else {
                             layer.open({
                                 content: '加载失败，请重试～'
-                                ,skin: 'msg'
-                                ,time: 2 //2秒后自动关闭
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
                             });
                         }
                         layer.closeAll();
                     },
-                    error:function(error){
+                    error: function (error) {
                         console.log(error)
                         layer.closeAll();
                         layer.open({
                             content: '加载失败，请重试～'
-                            ,skin: 'msg'
-                            ,time: 2 //2秒后自动关闭
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
                         });
                     }
                 });
             }
         },
-        mounted(){
+        mounted() {
 
         }
     })
