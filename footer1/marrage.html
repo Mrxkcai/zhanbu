@@ -6,6 +6,7 @@
   <title>八字合婚</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
   <link rel="stylesheet" type="text/css" href="../assets/css/iosSelect.css">
+    <link rel="stylesheet" href="../assets/css/util.css?v=1.0.0">
   <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css" />
 </head>
 <body>
@@ -57,6 +58,12 @@
            </div>
            <!-- 测算按钮 E -->
         </div>
+
+
+        <!-- 消息提示 S-->
+        <div id="snackbar"></div>
+        <!-- 消息提示 E-->
+
     </div>
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -71,11 +78,18 @@
             userInput1:'请选择生辰八字',
             userInput2:'请选择生辰八字',
             manUser:{
-                name:'小菜'
+                name:''
             },
             womanUser:{
-                name:'小菜'
-            }
+                name:''
+            },
+            id:null,                //url中获取参数
+            characterInfo:{         //测算信息
+                menDate:null,
+                menHour:null,
+                womanDate:null,
+                womanHour:null
+            }        
         },
         watch:{
             
@@ -86,11 +100,46 @@
         methods:{
             //立即测算
             goEstimate(){
+                var that = this;
 
+                //判断信息是否填写
+                if(that.userInput1 == '请选择生辰八字' || that.userInput2 == '请选择生辰八字' || that.manUser.name == '' || that.womanUser.name == ''){
+                    myFunction('snackbar','请填写完整测算信息');
+                    return false;
+                }else{
+                    // console.log(that.characterInfo)
+                    //debugger
+                    $.ajax({
+                        url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                        type:'get',
+                        dataType:'json',
+                        data:{
+                            jsonParams:JSON.stringify(that.characterInfo)
+                        },
+                        success:function(res){
+                            console.log(res)
+                            if(res.code == 200){
+                                // console.log(JSON.parse(res.message))
+                                
+                            }else{
+
+                            }
+                        },
+                        error:function(){
+
+                        }
+                    });
+                }
+            },
+            init(){
+                 var that = this;
+                that.id = getUrlParam('id');
+                // console.log(that.id)
             }
         },
         mounted(){
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            this.init();
         }
     })
 </script>
@@ -202,6 +251,11 @@
                     showDateDom.attr('data-hour', selectFourObj.id);
                     vm.userInput1 = null;
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
+
+                    //付值
+
+                    vm.characterInfo.menDate = selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id);
+                    vm.characterInfo.menHour = (selectFourObj.id * 2).toString()
                 }
         });
     });
@@ -228,6 +282,10 @@
                     showDateDomTwo.attr('data-hour', selectFourObj.id);
                     vm.userInput2 = null;
                     showDateDomTwo.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
+
+                    //付值
+                    vm.characterInfo.womanDate = selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id);
+                    vm.characterInfo.womanHour = (selectFourObj.id * 2).toString()
                 }
         });
     });
