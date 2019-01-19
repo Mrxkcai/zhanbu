@@ -17,7 +17,8 @@ function isUserInfo(key){
 
 
 
-  var baseUrl = 'https://wxcs.nuoweibd.com/';
+var baseUrl = 'https://wxcs.nuoweibd.com/';
+//var baseUrl = 'http://114.115.161.114:8220/';
   var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
   var Token = 'eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcklkIjoiMSIsIm5hbWUiOiJoYWhhIiwiZXhwIjoxNTQ3ODk1NDUyfQ.hl57lRhFeMKTzlLQhWiawQqyEZQk80kEyJx1xFzQ_aLzSVEsKpfNP17YKJ7RcyZz-9P8SFJn3Z5KbmbsDr1ODtBwDAbDsi0-ZrJsGc4atRBC18DRGPH4OdVGbfksKua08_8oA1IYSQN-UuGVqo1fn6LUJlr8AtIobQ8EOTkFpmo';
 

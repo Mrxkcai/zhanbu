@@ -60,7 +60,7 @@
             <!-- 孕育 测算 -->
             <!-- <div class="click_btn8"></div> -->
 
-            <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + baseImgUrl + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
+            <div class="click_btn" v-for="item, index in getHasTopList" :style="{backgroundImage: 'url(' + item.picUrl + ')', backgroundSize:'contain'}" :key='item.orders' @click='toDetailPage(item.id)'>
                 <div>
                     <p>{{item.name}}</p>
                 </div>
@@ -86,7 +86,7 @@
                     <tr v-for='item,index in popularerweiArr'>
                         <td v-for='list,index in item' @click='toDetailPage(list.id)'>
                             <div class="popular_hot_title">
-                                <img :src="list.picUrl?baseImgUrl + list.picUrl:''" alt="">
+                                <img :src="list.picUrl?list.picUrl:''" alt="">
                                 <span>{{list.name}}</span>
                             </div>
                         </td>
@@ -108,12 +108,8 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.0"></script>
-<!--<script src="../assets/js/zepto.js"></script>-->
-<script
-  src="http://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+<script src="../assets/js/util.js?v=1.0.01"></script>
+<script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
@@ -220,12 +216,14 @@
             //热门测算接口
             init(){
                 var that = this;
+                var token = localStorage.getItem('token');
                 $.ajax({
                     url:baseUrl + 'augury/small/program/api/category/list',
                     type:'get',
                     data:{
                         hasHot:true
                     },
+                    headers: {'Authorization': Token},
                     success:function(res){
                         if(res.code == 200){
                             // console.log(res)
@@ -257,14 +255,7 @@
                         hasTop:true,
                         hasHot:false
                     },
-//					headers: {'Authorization': Token},
-                   beforeSend: function(request) {
-                   	console.log(request)
-			             request.setRequestHeader("Authorization", Token);
-			             	console.log(request)
-			       	console.log(request.getResponseHeader('Authorization')) 
-                   },
-					
+					headers: {'Authorization': Token},
                     success:function(res){
                     	console.log(res)
                         if(res.code == 200){
@@ -306,7 +297,7 @@
             };
 
             
-            // this.init();
+               this.init();
             this.getHasTop();
         }
     })
