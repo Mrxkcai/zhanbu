@@ -109,7 +109,11 @@
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
 <script src="../assets/js/util.js?v=1.0.0"></script>
-<script src="../assets/js/zepto.js"></script>
+<!--<script src="../assets/js/zepto.js"></script>-->
+<script
+  src="http://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 <script>
     var vm = new Vue({
         el:'#app',
@@ -177,7 +181,7 @@
             //点击热门测算
             toDetailPage(id){
                 $.ajax({
-                    url:baseUrl + 'small/program/api/augury/list/' + id,
+                    url:baseUrl + 'augury/small/program/api/augury/list/' + id,
                     type:'get',
                     success:function(res){
                         if(res.code == 200){
@@ -217,7 +221,7 @@
             init(){
                 var that = this;
                 $.ajax({
-                    url:baseUrl + 'small/program/api/category/list',
+                    url:baseUrl + 'augury/small/program/api/category/list',
                     type:'get',
                     data:{
                         hasHot:true
@@ -243,15 +247,28 @@
             ////置顶接口
             getHasTop(){
                 var that = this;
+                var token = localStorage.getItem('token');
+//              console.log(Token)
+                
                 $.ajax({
-                    url:baseUrl + 'small/program/api/category/list',
+                    url:baseUrl + 'augury/small/program/api/category/list',
                     type:'get',
                     data:{
-                        hasTop:true
+                        hasTop:true,
+                        hasHot:false
                     },
+//					headers: {'Authorization': Token},
+                   beforeSend: function(request) {
+                   	console.log(request)
+			             request.setRequestHeader("Authorization", Token);
+			             	console.log(request)
+			       	console.log(request.getResponseHeader('Authorization')) 
+                   },
+					
                     success:function(res){
+                    	console.log(res)
                         if(res.code == 200){
-                            console.log(res)
+                            
                             if(res.data.length > 0){
                                 that.getHasTopList = res.data;
 
@@ -263,6 +280,7 @@
                             myFunction('snackbar','请求失败')
                         }
                     },
+                    
                     error:function(){
 
                     }
@@ -288,7 +306,7 @@
             };
 
             
-            this.init();
+            // this.init();
             this.getHasTop();
         }
     })
