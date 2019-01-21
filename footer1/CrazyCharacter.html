@@ -67,7 +67,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js"></script>
+<script src="../assets/js/util.js?v=1.0.01"></script>
 <script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/iosSelect.js"></script>
 
@@ -88,12 +88,21 @@
                 if(this.characterInfo == null){
                     myFunction('snackbar','请选择您的出生日期');
                     return false
-                }
+                };
+                // var jsonParams = JSON.stringify(this.characterInfo);
+
+                // Ajax.get(baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'), function(res){
+                //     var res = JSON.parse(res);
+                //     console.log(res)
+                // }, jsonParams);
+
+                // return
+                
                 $.ajax({
                     url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                     type:'get',
                     dataType:'json',
-                    headers: {'Authorization': Token},
+                    headers: {'Authorization': getLocalStorage('token')},
                     data:{
                         jsonParams:JSON.stringify(this.characterInfo)
                     },
@@ -102,7 +111,13 @@
                         if(res.code == 200){
                             // console.log(JSON.parse(res.message))
                             that.dataInfo = true;
-                            that.dataResult = JSON.parse(res.message)
+                            if(res.message == null){
+                                myFunction('snackbar','暂无信息');
+                            }else{
+                                
+                                that.dataResult = JSON.parse(res.message)
+                            }
+                            
                             // console.log(this.dataInfo)   
                         }else{
 
@@ -122,6 +137,8 @@
         },
         mounted() {
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            //调用获取 token 的方法
+            getLocalStorage('token')
             this.init();
         }
     })
@@ -235,7 +252,7 @@
                     
                     vm.characterInfo = {
                         date:selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id) ,
-                        hour:selectFourObj.id * 2
+                        hour:(selectFourObj.id * 2).toString()
                     }
 
                     // console.log(vm.characterInfo)

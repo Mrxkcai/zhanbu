@@ -23,37 +23,38 @@ var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
 
 	
 var Ajax={
-  get: function(url, fn) {
-    // XMLHttpRequest对象用于在后台与服务器交换数据   
-    var xhr = new XMLHttpRequest();            
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
-    xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
-    xhr.onreadystatechange = function() {
-      // readyState == 4说明请求已完成
-      if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) { 
-        // 从服务器获得数据 
-        fn.call(this, xhr.responseText);  
-      }
-    };
-    xhr.send();
-  },
-  // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-  post: function (url, data, fn, bool) {
-    var xhr = new XMLHttpRequest();
-    var boole;
-    if(bool===false){boole = bool}else{boole = true}
-    xhr.open("POST", url, boole);
-    // 添加http头，发送信息至服务器时内容编码类型
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
-    xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
-        fn.call(this, xhr.responseText);
-      }
-    };
-    xhr.send(data);
-  }
+    get: function(url, fn) {
+      // XMLHttpRequest对象用于在后台与服务器交换数据   
+      var xhr = new XMLHttpRequest();            
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
+      console.log(getLocalStorage('token'))
+      xhr.setRequestHeader("Authorization", getLocalStorage('token'));
+      xhr.onreadystatechange = function() {
+        // readyState == 4说明请求已完成
+        if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) { 
+          // 从服务器获得数据 
+          fn.call(this, xhr.responseText);  
+        }
+      };
+      xhr.send();
+    },
+    // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+    post: function (url, data, fn, bool) {
+      var xhr = new XMLHttpRequest();
+      var boole;
+      if(bool===false){boole = bool}else{boole = true}
+      xhr.open("POST", url, boole);
+      // 添加http头，发送信息至服务器时内容编码类型
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
+      xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+          fn.call(this, xhr.responseText);
+        }
+      };
+      xhr.send(data);
+    }
 };
 
 //获取 CODE;
@@ -67,10 +68,11 @@ function getCode(){
       // localStorage.setItem('token', JSON.parse(res).data)
   },false);
   
-  
 };
 //调用获取 CODE 方法
-getCode();
+// getCode();
+
+// setInterval(function(){getCode()},60 * 60 * 1000)
 
 
 //setlocalstorage
@@ -84,13 +86,6 @@ function setLocalStorage(key, value){
     try {
         localStorage.setItem(key, valueDate);
     } catch (e) {
-        // if(e.name === 'QUOTA_EXCEEDED_ERR' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
-        //      console.log("Error: 本地存储超过限制");
-        //     localStorage.clear();
-        //  } else {
-        //      console.log("Error: 保存到本地存储失败");
-        // }
-
         // 兼容写法
         if(isQuotaExceeded(e)) {
           console.log("Error: 本地存储超过限制");
@@ -125,7 +120,7 @@ function isQuotaExceeded(e) {
 
 //  获取localstorage
 function getLocalStorage(key) {
-     var exp = 60 * 60; 
+     var exp = 60 * 60 * 1000; 
      if(localStorage.getItem(key)) {
          var vals = localStorage.getItem(key); // 获取本地存储的值 
          var dataObj = JSON.parse(vals); // 将字符串转换成JSON对象
