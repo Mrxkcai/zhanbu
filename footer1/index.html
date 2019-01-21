@@ -108,7 +108,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.07"></script>
+<script src="../assets/js/util.js?v=1.0.08"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
@@ -298,7 +298,12 @@
                     // console.log(JSON.parse(res))
                     var result = JSON.parse(res);
                     if(result.data.length > 0){
-                        that.getHasTopList = result.data;
+                        // that.getHasTopList = result.data;
+                        for(var i = 0; i < result.data.length; i ++){
+                            if(i < 8){
+                                that.getHasTopList.push(result.data[i])
+                            }
+                        }
 
                     }else{
 
@@ -333,6 +338,19 @@
 
                 //     }
                 // });
+            },
+
+            //获取用户信息
+            getUserInfo(){
+                var that = this;
+                Ajax.get(baseUrl + '/augury/small/program/api/user/info', function(res){
+                    var result = JSON.parse(res)
+                    console.log(result)
+                    if(result.code == 200){
+                        that.userInfo.userName = result.data.nickname;
+                        setLocalStorage('userInfo', that.userInfo)
+                    }
+                })
             }
             
         },
@@ -353,16 +371,13 @@
                 this.hasUserInfo = false;
             };
             
-            //调用获取 token 的方法
-            getLocalStorage('token')
-            if(!getLocalStorage('code')){
-                getCode()
-            }else{
-                getLocalStorage('code')
-            }
+            //获取 CODE 方法
+            getCode()
+
+            
             this.init();
             this.getHasTop();
-            
+            this.getUserInfo();
             
         }
     })

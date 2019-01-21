@@ -16,13 +16,13 @@
         	<div style="display: inline-block;position: relative;">
         		<img src="../assets/images/marrage/name-back.png" class="name-back" />
         		<div class="man-name-box">
-        			<p>彭于晏</p>
-        			<p>农历1987年5月23日 卯时 陕西省西安市出生  </p>
+        			<p>{{ men.name }}</p>
+        			<p>农历  {{men.birth}}</p>
         		</div>
         		
         		<div class="moman-name-box">
-        			<p>严设计</p>
-        			<p>农历1987年5月23日 卯时 陕西省西安市出生  </p>
+        			<p>{{women.name}}</p>
+        			<p>农历  {{women.birth}} </p>
         		</div>
         	</div>
         	
@@ -34,14 +34,10 @@
         		
         		<img src="../assets/images/marrage/marrage-result.png" class="marrage-result" />
         		
-        		<div class="hehun-list">
+        		<div class="hehun-list" v-for='item in listArray2'>
         			<img src="../assets/images/marrage/marrage-star.png" class="marrage-star" />
         			<p>
-        				农历1987年5月23日 卯时 陕西省西安市出生农历1987年5月23日 
-        				卯时 陕西省西安市出生农历1987年5月23日 
-        				卯时 陕西省西安市出生农历1987年5月23日 
-        				卯时 陕西省西安市出生农历1987年5月23日 
-        				卯时 陕西省西安市出生
+        				{{item}}
         			</p>
         			<div style="clear: both;"></div>
         		</div>
@@ -67,19 +63,17 @@
         data:{
             userInput1:'请选择生辰八字',
             userInput2:'请选择生辰八字',
-            manUser:{
-                name:''
-            },
-            womanUser:{
-                name:''
-            },
+            men:{},
+            women:{},
             id:null,                //url中获取参数
             characterInfo:{         //测算信息
                 menDate:null,
                 menHour:null,
                 womanDate:null,
                 womanHour:null
-            }        
+            },
+            listArray:{},
+            listArray2:[]
         },
         watch:{
             
@@ -97,6 +91,15 @@
         },
         mounted(){
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            this.listArray = JSON.parse(localStorage.getItem('listData'))
+            for(var i = 0;i < this.listArray.data.length; i ++){
+                this.listArray2.push(this.listArray.data[i].slice(1)) 
+            }
+
+            console.log(this.listArray)
+            this.men = this.listArray.men
+            this.women = this.listArray.women
+            
             this.init();
         }
     })

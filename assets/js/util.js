@@ -25,7 +25,7 @@ var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
 var Ajax={
     get: function(url, fn) {
       // XMLHttpRequest对象用于在后台与服务器交换数据   
-      var xhr = new XMLHttpRequest();            
+      var xhr = new XMLHttpRequest();        
       xhr.open('GET', url, true);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
       console.log(getLocalStorage('token'))
@@ -60,20 +60,37 @@ var Ajax={
 //获取 CODE;
 function getCode(){
   var data = {
-      code:getUrlParam('code')?getUrlParam('code'):''
+      code:getUrlParam('code')?getUrlParam('code'):'123456'
   };
-  Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
-      console.log(JSON.parse(res))
-      setLocalStorage('token', JSON.parse(res).data)
-      // localStorage.setItem('token', JSON.parse(res).data)
-  },false);
+
+  if(!getLocalStorage()){
+    //传餐数据是json格式
+    Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
+        console.log(JSON.parse(res))
+        setLocalStorage('token', JSON.parse(res).data)
+        // localStorage.setItem('token', JSON.parse(res).data)
+    },false);
+    
+  }else if(getLocalStorage() == '存储已过期'){
+      refreshToken()
+  }
+  
   
 };
-//调用获取 CODE 方法
-// getCode();
 
-// setInterval(function(){getCode()},60 * 60 * 1000)
 
+//刷新token方法
+function refreshToken(){
+  var token = getLocalStorage('token');
+  console.log(token)
+
+  Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + token, function(res){
+      console.log(JSON.parse(res))
+      setLocalStorage('token', JSON.parse(res).data)
+  });
+};
+
+// refreshToken()
 
 //setlocalstorage
 function setLocalStorage(key, value){
@@ -120,7 +137,8 @@ function isQuotaExceeded(e) {
 
 //  获取localstorage
 function getLocalStorage(key) {
-     var exp = 60 * 60 * 1000; 
+     var exp = 60 * 60 * 1000 - 5000; 
+    // var exp = 5000; 
      if(localStorage.getItem(key)) {
          var vals = localStorage.getItem(key); // 获取本地存储的值 
          var dataObj = JSON.parse(vals); // 将字符串转换成JSON对象
@@ -129,9 +147,8 @@ function getLocalStorage(key) {
          if(isTimed) {
              console.log("存储已过期");
              localStorage.removeItem(key);
-             //调用获取 CODE 方法
-             getCode()
-             return null;
+             
+             return "存储已过期";
          } else {
              var newValue = dataObj.val;
          }

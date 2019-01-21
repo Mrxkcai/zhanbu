@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
   <link rel="stylesheet" type="text/css" href="../assets/css/iosSelect.css">
     <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
-  <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css?v=1.0.0" />
 </head>
 <body>
     <div id="app" v-cloak>
@@ -68,7 +68,7 @@
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
-<script src="../assets/js/util.js"></script>
+<script src="../assets/js/util.js?v=1.0.0"></script>
 <script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/iosSelect.js"></script>
 <script>
@@ -97,7 +97,18 @@
                 hour2:null,
                 name2:null,
                 sex2:null
-            }        
+            },
+            listArray:{
+                men:{
+                    name:'',
+                    birth:''
+                },
+                women:{
+                    name:'',
+                    birth:''
+                },
+                data:[]
+            }     
         },
         watch:{
             
@@ -108,7 +119,6 @@
         methods:{
             //立即测算
             goEstimate(){
-            	var that = this;
                 var that = this;
 				var obj = {
 					dataType:null,
@@ -163,22 +173,40 @@
                        console.log(obj)
 //                     return false;
                     //debugger
+
+                    // Ajax.get(baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id') + jsonParams + '=' + JSON.stringify(obj), function(res){
+                    //     var res = JSON.parse(res);
+                    //     console.log(res)
+                    // });
+                    
+                    
                     $.ajax({
                         url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                         type:'get',
                         dataType:'json',
-                        headers: {'Authorization': Token},
+                        headers: {'Authorization': getLocalStorage('token')},
+                        // async:false,
                         data:{
                             jsonParams:JSON.stringify(obj)
                         },
                         success:function(res){
-                            console.log(res)
-                            console.log(res.message)
+                            // console.log(res)
+                            // console.log(res.message)
                             if(res.code == 200){
-                                // console.log(JSON.parse(res.message))
-                                res.message.forEach(function(key){
-                                	console.log(res.message[key])
-                                })
+                                console.log(JSON.parse(res.message))
+                                var obj = JSON.parse(res.message);
+                                Object.keys(obj).forEach(function(key){
+                                    that.listArray.data.push(obj[key])
+                                });
+                                
+                                that.listArray.men.name = that.characterInfo.name;
+                                that.listArray.men.birth = document.getElementById('showDate').innerText;
+                                that.listArray.women.name = that.characterInfo.name2;
+                                that.listArray.women.birth = document.getElementById('showDate_two').innerText;
+                                
+                                localStorage.removeItem('listData')
+                                localStorage.setItem('listData', JSON.stringify(that.listArray))
+                                window.location.href = './marrage-result.html'
                                 
                             }else{
 
@@ -188,6 +216,8 @@
 
                         }
                     });
+
+
                 }
             },
             init(){
@@ -198,6 +228,8 @@
         },
         mounted(){
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            //调用获取 token 的方法
+            getLocalStorage('token')
             this.init();
         }
     })
@@ -318,6 +350,7 @@
                     vm.characterInfo.day = selectThreeObj.id
                     vm.characterInfo.hour = selectFourObj.id
                     
+
 //                  vm.characterInfo.menHour = (selectFourObj.id * 2).toString()
                 }
         });
