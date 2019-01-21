@@ -1,0 +1,76 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    color: #333;
+    position: absolute;
+    z-index: 99;
+}
+.bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../images/yunshi/infoGb.png") no-repeat;
+    background-size: 100% 100%;
+}
+.main{
+    width: 100%;
+    padding-bottom: .4rem;
+}
+.main img{
+    display: block;
+    width: 4.71rem;
+    margin: .54rem auto .42rem;
+    /*position: fixed;*/
+}
+.main h1{
+    text-align: center;
+    font-size:.46rem;
+    font-weight:bold;
+    color:rgba(252,201,108,1);
+}
+.main p,.main div{
+    width: 6.27rem;
+    margin: 0 auto;
+    height: auto;
+    background: #EAC9B7;
+    padding: .5rem .35rem;
+    box-sizing: border-box;
+    font-size: .26rem;
+    color:rgba(98,54,27,1);
+    line-height:.56rem;
+    text-align: justify;
+    /*margin-top: .24rem;*/
+    /*margin-bottom: .62rem;*/
+    position: relative;
+}
+.main div{
+    background: none;
+    color: #FCC96C;
+}
+.main p:after{
+    display: block;
+    content: '';
+    width: 104%;
+    height: 94%;
+    background: #C88D7A;
+    position: absolute;
+    left: -2%;
+    top: 3%;
+    z-index: -1;
+}
+.main h6{
+    margin: .6rem auto .4rem;
+    width: 5.16rem;
+    height: .63rem;
+    font-size: .32rem;
+    color:rgba(232,207,155,1);
+    background: url("../images/yunshi/h6_bg.png") no-repeat;
+    background-size: 100%;
+    text-align: center;
+    line-height: .63rem;
+}

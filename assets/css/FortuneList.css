@@ -1,0 +1,57 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/yunshi/bg-2019.png") no-repeat;
+    background-size: 100% 100%;
+
+}
+.main{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:flex-end;
+}
+.main div{
+    width: 25%;
+    margin-bottom: .6rem;
+}
+.main div img{
+    display: block;
+    width: .81rem;
+    margin: 0 auto;
+}
+.main div:nth-of-type(2) img{
+     width: 1.16rem;
+ }
+.main div:nth-of-type(3) img{
+    width: .74rem;
+}
+.main div:nth-of-type(4) img{
+    width: 1.13rem;
+}
+.main div:nth-of-type(5) img,.main div:nth-of-type(8) img{
+    width: 1.11rem;
+}
+.main div:nth-of-type(6) img{
+    width: 1.04rem;
+}
+.main div:nth-of-type(7) img,.main div:nth-of-type(12) img{
+    width: 1.14rem;
+}
+.main div:nth-of-type(9) img{
+    width: .64rem;
+}
+.main div:nth-of-type(10) img{
+    width: 1.23rem;
+}
+.main div:nth-of-type(11) img{
+    width: 1.06rem;
+}
