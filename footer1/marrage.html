@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
   <link rel="stylesheet" type="text/css" href="../assets/css/iosSelect.css">
     <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
-  <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/marrage.css?v=1.0.0" />
 </head>
 <body>
     <div id="app" v-cloak>
@@ -23,7 +23,7 @@
            <div class="marrage_man_info">
                 <div class="marrage_man_birth">
                     <span class="marrage_man_name">&nbsp;&nbsp;男方姓名</span>
-                    <input type="text" placeholder="请输入姓名" v-model="manUser.name" />
+                    <input type="text" placeholder="请输入姓名" v-model="characterInfo.name" />
                 </div>
                 <div class="marrage_man_birthday form-item item-line" id="selectDate">
                     <span class="marrage_man_name">&nbsp;&nbsp;生辰八字</span>
@@ -41,7 +41,7 @@
            <div class="marrage_woman_info">
                 <div class="marrage_woman_birth">
                     <span class="marrage_woman_name">&nbsp;&nbsp;女方姓名</span>
-                    <input type="text" placeholder="请输入姓名" v-model="womanUser.name" />
+                    <input type="text" placeholder="请输入姓名" v-model="characterInfo.name2" />
                 </div>
                 <div class="marrage_woman_birthday form-item item-line" id="selectDate_two">
                     <span class="marrage_woman_name">&nbsp;&nbsp;生辰八字</span>
@@ -68,7 +68,7 @@
 </body>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
-<script src="../assets/js/util.js"></script>
+<script src="../assets/js/util.js?v=1.0.0"></script>
 <script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/iosSelect.js"></script>
 <script>
@@ -85,11 +85,30 @@
             },
             id:null,                //url中获取参数
             characterInfo:{         //测算信息
-                menDate:null,
-                menHour:null,
-                womanDate:null,
-                womanHour:null
-            }        
+            		name:null,
+            		sex:null,
+                year:null,
+                month:null,
+                day:null,
+                hour:null,
+                year2:null,
+                month2:null,
+                day2:null,
+                hour2:null,
+                name2:null,
+                sex2:null
+            },
+            listArray:{
+                men:{
+                    name:'',
+                    birth:''
+                },
+                women:{
+                    name:'',
+                    birth:''
+                },
+                data:[]
+            }     
         },
         watch:{
             
@@ -101,25 +120,93 @@
             //立即测算
             goEstimate(){
                 var that = this;
-
+				var obj = {
+					dataType:null,
+					year:null,
+					month:null,
+					day:null,
+					hour:null,
+					minute:'',
+					pid:'',
+					cid:'',
+					name:null,
+					sex:null,
+					dataType2:null,
+					year2:null,
+					month2:null,
+					day2:null,
+					hour2:null,
+					minute2:null,
+					pid2:null,
+					cid2:null,
+					name2:null,
+					sex2:null
+				};
                 //判断信息是否填写
-                if(that.userInput1 == '请选择生辰八字' || that.userInput2 == '请选择生辰八字' || that.manUser.name == '' || that.womanUser.name == ''){
+                if(that.userInput1 == '请选择生辰八字' || that.userInput2 == '请选择生辰八字' || that.characterInfo.name == '' || that.characterInfo.name2 == ''){
                     myFunction('snackbar','请填写完整测算信息');
                     return false;
                 }else{
-                    // console.log(that.characterInfo)
+                       
+                       obj = {
+                       	dataType:'1',
+						year:that.characterInfo.year,
+						month:that.characterInfo.month,
+						day:that.characterInfo.day,
+						hour:that.characterInfo.hour,
+						minute:'0',
+						pid:'',
+						cid:'',
+						name:that.characterInfo.name,
+						sex:'1',
+						dataType2:'1',
+						year2:that.characterInfo.year2,
+						month2:that.characterInfo.month2,
+						day2:that.characterInfo.day2,
+						hour2:that.characterInfo.hour2,
+						minute2:'0',
+						pid2:'',
+						cid2:'',
+						name2:that.characterInfo.name2,
+						sex2:'0'
+                       }
+                       console.log(obj)
+//                     return false;
                     //debugger
+
+                    // Ajax.get(baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id') + jsonParams + '=' + JSON.stringify(obj), function(res){
+                    //     var res = JSON.parse(res);
+                    //     console.log(res)
+                    // });
+                    
+                    
                     $.ajax({
-                        url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                        url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                         type:'get',
                         dataType:'json',
+                        headers: {'Authorization': getLocalStorage('token')},
+                        // async:false,
                         data:{
-                            jsonParams:JSON.stringify(that.characterInfo)
+                            jsonParams:JSON.stringify(obj)
                         },
                         success:function(res){
-                            console.log(res)
+                            // console.log(res)
+                            // console.log(res.message)
                             if(res.code == 200){
-                                // console.log(JSON.parse(res.message))
+                                console.log(JSON.parse(res.message))
+                                var obj = JSON.parse(res.message);
+                                Object.keys(obj).forEach(function(key){
+                                    that.listArray.data.push(obj[key])
+                                });
+                                
+                                that.listArray.men.name = that.characterInfo.name;
+                                that.listArray.men.birth = document.getElementById('showDate').innerText;
+                                that.listArray.women.name = that.characterInfo.name2;
+                                that.listArray.women.birth = document.getElementById('showDate_two').innerText;
+                                
+                                localStorage.removeItem('listData')
+                                localStorage.setItem('listData', JSON.stringify(that.listArray))
+                                window.location.href = './marrage-result.html'
                                 
                             }else{
 
@@ -129,6 +216,8 @@
 
                         }
                     });
+
+
                 }
             },
             init(){
@@ -139,6 +228,8 @@
         },
         mounted(){
             document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            //调用获取 token 的方法
+            getLocalStorage('token')
             this.init();
         }
     })
@@ -254,8 +345,13 @@
 
                     //付值
 
-                    vm.characterInfo.menDate = selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id);
-                    vm.characterInfo.menHour = (selectFourObj.id * 2).toString()
+                    vm.characterInfo.year = selectOneObj.id
+                    vm.characterInfo.month = selectTwoObj.id
+                    vm.characterInfo.day = selectThreeObj.id
+                    vm.characterInfo.hour = selectFourObj.id
+                    
+
+//                  vm.characterInfo.menHour = (selectFourObj.id * 2).toString()
                 }
         });
     });
@@ -284,8 +380,12 @@
                     showDateDomTwo.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
 
                     //付值
-                    vm.characterInfo.womanDate = selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id);
-                    vm.characterInfo.womanHour = (selectFourObj.id * 2).toString()
+                    vm.characterInfo.year2 = selectOneObj.id
+                    vm.characterInfo.month2 = selectTwoObj.id
+                    vm.characterInfo.day2 = selectThreeObj.id
+                    vm.characterInfo.hour2 = selectFourObj.id
+                    
+//                  vm.characterInfo.womanHour = (selectFourObj.id * 2).toString()
                 }
         });
     });

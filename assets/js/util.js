@@ -17,30 +17,149 @@ function isUserInfo(key){
 
 
 
-  var baseUrl = 'https://wxcs.nuoweibd.com/';
-  var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
-  var Token = 'eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcklkIjoiMSIsIm5hbWUiOiJoYWhhIiwiZXhwIjoxNTQ3ODk1NDUyfQ.hl57lRhFeMKTzlLQhWiawQqyEZQk80kEyJx1xFzQ_aLzSVEsKpfNP17YKJ7RcyZz-9P8SFJn3Z5KbmbsDr1ODtBwDAbDsi0-ZrJsGc4atRBC18DRGPH4OdVGbfksKua08_8oA1IYSQN-UuGVqo1fn6LUJlr8AtIobQ8EOTkFpmo';
+var baseUrl = 'https://wxcs.nuoweibd.com/';
+var baseUrl2 = 'http://114.115.161.114:8220/';
+var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
 
-  // if(Token){
-  //     localStorage.setItem('token',Token);
-  // }else{
+	
+var Ajax={
+    get: function(url, fn) {
+      // XMLHttpRequest对象用于在后台与服务器交换数据   
+      var xhr = new XMLHttpRequest();        
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
+      console.log(getLocalStorage('token'))
+      xhr.setRequestHeader("Authorization", getLocalStorage('token'));
+      xhr.onreadystatechange = function() {
+        // readyState == 4说明请求已完成
+        if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) { 
+          // 从服务器获得数据 
+          fn.call(this, xhr.responseText);  
+        }
+      };
+      xhr.send();
+    },
+    // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+    post: function (url, data, fn, bool) {
+      var xhr = new XMLHttpRequest();
+      var boole;
+      if(bool===false){boole = bool}else{boole = true}
+      xhr.open("POST", url, boole);
+      // 添加http头，发送信息至服务器时内容编码类型
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
+      xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+          fn.call(this, xhr.responseText);
+        }
+      };
+      xhr.send(data);
+    }
+};
+
+//获取 CODE;
+function getCode(){
+  var data = {
+      code:getUrlParam('code')?getUrlParam('code'):'123456'
+  };
+
+  if(!getLocalStorage()){
+    //传餐数据是json格式
+    Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
+        console.log(JSON.parse(res))
+        setLocalStorage('token', JSON.parse(res).data)
+        // localStorage.setItem('token', JSON.parse(res).data)
+    },false);
     
-  // }
-
-  function getData(url,params,type){
-    
-      // if(type == 'get'){
-      //     $.ajax({
-      //         url: baseUrl + url,
-      //         type:type,
-      //         data:params,
-      //         success:function(res){
-      //           // console.log(res)
-      //         }
-      //     })
-
-      // }
+  }else if(getLocalStorage() == '存储已过期'){
+      refreshToken()
   }
+  
+  
+};
+
+
+//刷新token方法
+function refreshToken(){
+  var token = getLocalStorage('token');
+  console.log(token)
+
+  Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + token, function(res){
+      console.log(JSON.parse(res))
+      setLocalStorage('token', JSON.parse(res).data)
+  });
+};
+
+// refreshToken()
+
+//setlocalstorage
+function setLocalStorage(key, value){
+    var curtime = new Date().getTime(); // 获取当前时间 ，转换成JSON字符串序列 
+    var valueDate = JSON.stringify({
+        val: value,
+        timer: curtime
+    });
+
+    try {
+        localStorage.setItem(key, valueDate);
+    } catch (e) {
+        // 兼容写法
+        if(isQuotaExceeded(e)) {
+          console.log("Error: 本地存储超过限制");
+          localStorage.clear();
+        } else {
+          console.log("Error: 保存到本地存储失败");
+        }
+    }
+};
+
+//  检测出错方法
+function isQuotaExceeded(e) {
+     var quotaExceeded = false;
+     if(e) {
+         if(e.code) {
+             switch(e.code) {
+                 case 22:
+                     quotaExceeded = true;
+                     break;
+                 case 1014: // Firefox 
+                     if(e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                         quotaExceeded = true;
+                     }
+                     break;
+             }
+         } else if(e.number === -2147024882) { // IE8 
+             quotaExceeded = true;
+         }
+     }
+     return quotaExceeded;
+};
+
+//  获取localstorage
+function getLocalStorage(key) {
+     var exp = 60 * 60 * 1000 - 5000; 
+    // var exp = 5000; 
+     if(localStorage.getItem(key)) {
+         var vals = localStorage.getItem(key); // 获取本地存储的值 
+         var dataObj = JSON.parse(vals); // 将字符串转换成JSON对象
+         // 如果(当前时间 - 存储的元素在创建时候设置的时间) > 过期时间 
+         var isTimed = (new Date().getTime() - dataObj.timer) > exp;
+         if(isTimed) {
+             console.log("存储已过期");
+             localStorage.removeItem(key);
+             
+             return "存储已过期";
+         } else {
+             var newValue = dataObj.val;
+         }
+         return newValue;
+     } else {
+         return null;
+     }
+};
+
+
+
 
 
 // 一位数组转二维数组
