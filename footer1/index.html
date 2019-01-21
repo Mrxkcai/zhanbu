@@ -108,7 +108,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.03"></script>
+<script src="../assets/js/util.js?v=1.0.05"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
@@ -126,7 +126,8 @@
                 birth:'1988年3月20日子时',
                 num:70
             },
-            getHasTopList:[]       //获取置顶的八个图标
+            getHasTopList:[],       //获取置顶的八个图标
+            token:''
         },
         computed:{
             changeValue:function(){
@@ -217,27 +218,42 @@
             //热门测算接口
             init(){
                 var that = this;
-                $.ajax({
-                    url:baseUrl + 'augury/small/program/api/category/list',
-                    type:'get',
-                    data:{
-                        hasHot:true
-                    },
-                    headers: {'Authorization': Token},
-                    success:function(res){
-                        if(res.code == 200){
-                            // console.log(res)
-                            that.popularTitle = res.data
-                            that.popularerweiArr = arr(3,that.popularTitle);
-                            // console.log(that.popularerweiArr)
-                        }else{
-
-                        }
-                    },
-                    error:function(){
+                
+                Ajax.get(baseUrl + 'augury/small/program/api/category/list?hasHot=true&hasTop=false',function(res){
+                    // console.log(JSON.parse(res))
+                    var result = JSON.parse(res);
+                    if(result.code == 200){
+                        // console.log(res)
+                        that.popularTitle = result.data
+                        that.popularerweiArr = arr(3,that.popularTitle);
+                        // console.log(that.popularerweiArr)
+                    }else{
 
                     }
                 });
+
+                // $.ajax({
+                //     url:baseUrl + 'augury/small/program/api/category/list',
+                //     type:'get',
+                //     data:{
+                //         hasHot:true,
+                //         hasTop:false
+                //     },
+                //     headers: {'Authorization': Token},
+                //     success:function(res){
+                //         if(res.code == 200){
+                //             // console.log(res)
+                //             that.popularTitle = res.data
+                //             that.popularerweiArr = arr(3,that.popularTitle);
+                //             // console.log(that.popularerweiArr)
+                //         }else{
+
+                //         }
+                //     },
+                //     error:function(){
+
+                //     }
+                // });
 
                 
             },
@@ -247,34 +263,45 @@
                 var that = this;
 //              console.log(Token)
                 
-                $.ajax({
-                    url:baseUrl + 'augury/small/program/api/category/list',
-                    type:'get',
-                    data:{
-                        hasTop:true,
-                        hasHot:false
-                    },
-					headers: {'Authorization': Token},
-                    success:function(res){
-                    	console.log(res)
-                        if(res.code == 200){
-                            
-                            if(res.data.length > 0){
-                                that.getHasTopList = res.data;
+                Ajax.get(baseUrl + 'augury/small/program/api/category/list?hasHot=false&hasTop=true',function(res){
+                    // console.log(JSON.parse(res))
+                    var result = JSON.parse(res);
+                    if(result.data.length > 0){
+                        that.getHasTopList = result.data;
 
-                            }else{
-
-                            }
-
-                        }else{
-                            myFunction('snackbar','请求失败')
-                        }
-                    },
-                    
-                    error:function(){
+                    }else{
 
                     }
                 });
+
+                // $.ajax({
+                //     url:baseUrl + 'augury/small/program/api/category/list',
+                //     type:'get',
+                //     data:{
+                //         hasTop:true,
+                //         hasHot:false
+                //     },
+				// 	headers: {'Authorization': Token},
+                //     success:function(res){
+                //     	console.log(res)
+                //         if(res.code == 200){
+                            
+                //             if(res.data.length > 0){
+                //                 that.getHasTopList = res.data;
+
+                //             }else{
+
+                //             }
+
+                //         }else{
+                //             myFunction('snackbar','请求失败')
+                //         }
+                //     },
+                    
+                //     error:function(){
+
+                //     }
+                // });
             }
             
         },
@@ -294,10 +321,14 @@
                 this.tips = true;
                 this.hasUserInfo = false;
             };
-
             
-               this.init();
+            this.init();
             this.getHasTop();
+            
+            
+        },
+        beforeMount(){
+            // getCode()
         }
     })
 </script>
