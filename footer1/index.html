@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>命理测算</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.0" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.03" />
   <link rel="stylesheet" href="../assets/component/footer/footer.css">
 </head>
 <body>
@@ -108,7 +108,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.01"></script>
+<script src="../assets/js/util.js?v=1.0.03"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
@@ -179,6 +179,7 @@
                 $.ajax({
                     url:baseUrl + 'augury/small/program/api/augury/list/' + id,
                     type:'get',
+                    headers: {'Authorization': Token},
                     success:function(res){
                         if(res.code == 200){
                             console.log(res)
@@ -216,7 +217,6 @@
             //热门测算接口
             init(){
                 var that = this;
-                var token = localStorage.getItem('token');
                 $.ajax({
                     url:baseUrl + 'augury/small/program/api/category/list',
                     type:'get',
@@ -245,7 +245,6 @@
             ////置顶接口
             getHasTop(){
                 var that = this;
-                var token = localStorage.getItem('token');
 //              console.log(Token)
                 
                 $.ajax({

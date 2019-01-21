@@ -101,3 +101,82 @@
 .marrage_info .grayColor{
     color: #999999!important;
 }
+
+
+
+
+
+
+
+/*合婚测试结果*/
+.app{
+	background: #fbf9f3!important;
+}
+#result-name{
+	width:6.43rem;
+	height:3.46rem;
+	/*background:rgba(246,233,221,1);*/
+	/*background: url('../images/marrage/name-back.png');*/
+	background-size: 100% 100%;
+	margin: .5rem auto;
+}
+.name-back{
+	width:100%;
+}
+.man-name-box{
+	width: 5.23rem;
+	position: absolute;
+	left: 50%;
+	margin-left: -2.615rem;
+	top: 1.35rem;
+}
+.man-name-box p,.moman-name-box p{
+	text-align: center;
+}
+.moman-name-box{
+	width: 5.23rem;
+	position: absolute;
+	left: 50%;
+	margin-left: -2.615rem;
+	top: 2.6rem;
+}
+.man-name-box p:nth-child(1),.moman-name-box p:nth-child(1){
+	font-size:.3rem;
+	font-family:PingFangSC-Medium;
+	font-weight:500;
+	color:rgba(144,94,46,1);
+}
+.man-name-box p:nth-child(2),.moman-name-box p:nth-child(2){
+	font-size:.26rem;
+	font-family:PingFangSC-Regular;
+	font-weight:400;
+	color:rgba(144,94,46,1);
+	margin-top: .25rem;
+}
+.marrage-result{
+	display: block;
+	width: 3.02rem;
+	height: .81rem;
+	margin: -3.5rem auto 0;
+}
+.hehun-list{
+	width: 7rem;
+	margin: .45rem auto .4rem;
+	clear: both;
+}
+.hehun-list .marrage-star{
+	width: .26rem;
+	height: .26rem;
+	float: left;
+}
+.hehun-list p{
+	width: 5.96rem;
+	float: left;
+	margin-left: .3rem;
+	font-size:.26rem;
+	font-family:PingFangSC-Regular;
+	font-weight:400;
+	color:rgba(144,94,46,1);
+	line-height:.48rem;
+	margin-top: -.1rem!important;
+}

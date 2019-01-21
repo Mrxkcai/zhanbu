@@ -90,9 +90,10 @@
                     return false
                 }
                 $.ajax({
-                    url:baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                    url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                     type:'get',
                     dataType:'json',
+                    headers: {'Authorization': Token},
                     data:{
                         jsonParams:JSON.stringify(this.characterInfo)
                     },
