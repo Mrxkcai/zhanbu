@@ -184,10 +184,10 @@
                         console.log(res)
                         
                         
-                        // if(!isUserInfo('userInfo')){
-                        //     window.location.href = './personInfo.html';
-                        //     return false;
-                        // }
+                        if(!isUserInfo('userInfo')){
+                            window.location.href = './personInfo.html';
+                            return false;
+                        }
                         
                         if(!res.data[0]){ 
                             return false;

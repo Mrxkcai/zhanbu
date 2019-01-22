@@ -1,0 +1,22 @@
+#app{
+    background: url('../images/yunshi/back.png');
+    background-size: 100% 100%;
+    position: relative;
+}
+.everyDay{
+    width:6.67rem;
+    min-height:5rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -3.335rem;
+    top: 4.6rem;
+    background: url('../images/yunshi/dikuang.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.fengexian{
+    display: block;
+    width: 6rem;
+    height: .8rem;
+    margin: .8rem auto 0;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>每日运势</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/everyDay.css" />
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="everyDay">
+        <img src="../assets/images/yunshi/fxjg.png" class="fengexian" alt="">
+    </div>
+</div>
+<div class="bg"></div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:''
+        },
+        created(){
+            
+        },
+        methods:{
+            init(){
+                var that = this;
+                
+            }
+        },
+        mounted(){
+            document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            //调用获取 token 的方法
+            getLocalStorage('token')
+            this.init();
+        }
+    })
+</script>
+</html>
