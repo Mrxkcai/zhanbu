@@ -86,7 +86,8 @@
         created() {
             //console.log(getUrlParam('index'))
             this.picImg = getUrlParam('index') + '.png';
-            this.init()
+            this.init();
+            getLocalStorage('token')
         },
         computed: {
             handleLucky() {
@@ -121,9 +122,10 @@
                     content: '加载中~'
                 })
                 $.ajax({
-                    url: baseUrl + 'small/program/api/augury/info/' + getUrlParam('id'),
+                    url: baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                     type: 'get',
                     dataType: 'json',
+                    headers: {'Authorization': getLocalStorage('token')},
                     data: {
                         jsonParams: JSON.stringify(jsonParams)
                     },

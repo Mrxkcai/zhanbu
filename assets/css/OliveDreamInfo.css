@@ -1,0 +1,75 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/icon/oliveDInfoBG.png") no-repeat;
+    background-size: 100% 100%;
+
+}
+.header{
+    width: 5.18rem;
+    height: 1.36rem;
+    background: url("../images/icon/oliveDInfoH.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    left: 1.16rem;
+    top: 1.7rem;
+    font-size: .28rem;
+    color: #F6EBD3;
+    padding: .3rem;
+    box-sizing: border-box;
+}
+.header span{
+    font-weight: 600;
+}
+.titleBg{
+    width: 4.15rem;
+    margin: 3.8rem auto 0;
+}
+.titleBg img{
+    display: block;
+    width: 100%;
+}
+.main-bg{
+    position: absolute;
+    top: 4.4rem;
+    left: 0;
+    width: 100%;
+    height: 8.2rem;
+    background: url("../images/icon/oDInfoM.png") no-repeat;
+    background-size: 100%;
+}
+.main{
+    width: 100%;
+    height: 7.4rem;
+    position: absolute;
+    top: 4.85rem;
+    left: 0;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+.mesLIst:first-child{
+    padding: .42rem .9rem 0;
+}
+.mesLIst{
+    padding: 0 .9rem;
+    box-sizing: border-box;
+    margin-bottom: .32rem;
+}
+.mesLIst p{
+    color: #B17654;
+    font-size: .28rem;
+    font-weight:600;
+    margin-bottom: .16rem;
+}
+.mesLIst span{
+    display: block;
+    color: #333;
+    font-size: .24rem;
+    line-height: .42rem;
+}

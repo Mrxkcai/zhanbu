@@ -82,7 +82,7 @@ function getCode(){
 
 //刷新token方法
 function refreshToken(){
-  var token = getLocalStorage('token');
+  var token = localStorage.getItem('token');
   console.log(token)
 
   Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + token, function(res){
@@ -147,18 +147,19 @@ function getLocalStorage(key) {
          var isTimed = (new Date().getTime() - dataObj.timer) > exp;
          if(isTimed) {
              console.log("存储已过期");
-             localStorage.removeItem(key);
-             
+             //localStorage.removeItem(key);
+             getLocalStorage('token')
+             refreshToken();
              return "存储已过期";
          } else {
              var newValue = dataObj.val;
          }
          return newValue;
      } else {
+         getCode();
          return null;
      }
 };
-
 
 
 
