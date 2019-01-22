@@ -69,18 +69,18 @@ function getCode(){
   };
   // return false
 
-  if(!getLocalStorage()){
+  if(!getLocalStorage('token')){
+    console.log(getLocalStorage('getLocalStorage'))
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
         if(JSON.parse(res).code == 200){
-            setLocalStorage('token', JSON.parse(res).data)
+            setLocalStorage('token', JSON.parse(res).data) 
         }
         
-        // localStorage.setItem('token', JSON.parse(res).data)
     },false);
     
-  }else if(getLocalStorage() == '存储已过期'){
+  }else if(getLocalStorage('token') == '存储已过期'){
       refreshToken()
   }
   

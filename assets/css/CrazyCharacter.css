@@ -11,6 +11,12 @@
     background: url('../images/marrage/Character_border.png');
     background-size: 100% 100%;
 }
+.change-select_box{
+    height: 2.6rem;
+}
+.change-item-line{
+    margin: -.6rem 0 0 .5rem;
+}
 .title{
     display: inline-block;
     line-height: 1.5rem;

@@ -5,6 +5,12 @@ div, ul, li {
 ul, li {
     list-style: none outside none;
 }
+#showDate,.pc-box{
+    
+    /*text-overflow: ellipsis
+    ;overflow: hidden;
+    white-space: nowrap;*/
+}
 
 /* layer begin */
 .ios-select-widget-box.olay {
@@ -137,6 +143,15 @@ ul, li {
 .ios-select-widget-box.four-level-box .four-level-contain {
     width: 25%;
 }
+
+.ios-select-widget-box.four-level-box .four-level-contain {
+    width: 35%;
+}
+.ios-select-widget-box.four-level-box .two-level-contain,
+.ios-select-widget-box.four-level-box .three-level-contain{
+     width: 19.9%;
+}
+
 .ios-select-widget-box.four-level-box .five-level-contain,
 .ios-select-widget-box.four-level-box .six-level-contain {
     width: 0%;
