@@ -3,31 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>2019运势</title>
+    <title>周公解梦</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/Fortune.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/OliveD.css" />
 </head>
 <body>
 <div id="app" v-cloak>
-    <div class="main" v-html="msg">
-
+    <div class="main">
+        <div class="input-box">
+            <input type="text" placeholder="请输入">
+        </div>
+        <div class="handleBar"></div>
     </div>
 </div>
 <div class="bg"></div>
 </body>
 <script src="../static/js/vue.min.js"></script>
-<script src="../static/js/mock.js"></script>
 <script src="../assets/js/zepto.js"></script>
 <script src="../assets/js/util.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
         data:{
-            msg:''
-        },
-        created(){
-            var _index = getUrlParam('type')-1;
-            this.msg = zodiac[_index].msg
+
         },
         methods:{
 

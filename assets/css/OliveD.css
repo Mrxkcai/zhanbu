@@ -1,0 +1,45 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/icon/oliveDBg.png") no-repeat;
+    background-size: 100% 100%;
+
+}
+.main{
+    width: 100%;
+    padding: 0 .33rem;
+    box-sizing: border-box;
+    margin-top: 5rem;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+}
+.input-box{
+    width: 5.18rem;
+    height: .87rem;
+    background: url("../images/icon/oD_input.png") no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.input-box input{
+    display: block;
+    width: 4rem;
+    margin-left: 1.2rem;
+    background: none;
+    font-size: .28rem;
+    color: #B68868;
+    line-height: .87rem;
+}
+
+.handleBar{
+    width:1.43rem;
+    height:.87rem;
+    background: url("../images/icon/oD_bar.png") no-repeat;
+    background-size: 100% 100%;
+}

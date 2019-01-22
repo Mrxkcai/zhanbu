@@ -44,14 +44,10 @@ var Ajax={
       var xhr = new XMLHttpRequest();
       var boole;
       if(bool===false){boole = bool}else{boole = true}
-        // console.log(boole)
       xhr.open("POST", url, boole);
       // 添加http头，发送信息至服务器时内容编码类型
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
-      if(getLocalStorage()){
-           xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
-      }
-     
+      xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
           fn.call(this, xhr.responseText);
@@ -70,7 +66,7 @@ function getCode(){
   // return false
 
   if(!getLocalStorage('token')){
-    console.log(getLocalStorage('getLocalStorage'))
+    console.log(getLocalStorage('token'))
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
@@ -78,11 +74,18 @@ function getCode(){
             setLocalStorage('token', JSON.parse(res).data) 
         }
         
-    },false);
-    
-  }else if(getLocalStorage('token') == '存储已过期'){
-      refreshToken()
-  }
+  
+    if(!getLocalStorage('token')){
+      //传餐数据是json格式
+      Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
+          console.log(JSON.parse(res))
+          setLocalStorage('token', JSON.parse(res).data)
+          // localStorage.setItem('token', JSON.parse(res).data)
+      },false);
+      
+    }else if(getLocalStorage('token') == '存储已过期'){
+        refreshToken()
+    }
   
   
 };
@@ -90,7 +93,7 @@ function getCode(){
 
 //刷新token方法
 function refreshToken(){
-  var token = getLocalStorage('token');
+  var token = localStorage.getItem('token');
   console.log(token)
 
   Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + token, function(res){
@@ -155,17 +158,19 @@ function getLocalStorage(key) {
          var isTimed = (new Date().getTime() - dataObj.timer) > exp;
          if(isTimed) {
              console.log("存储已过期");
-             localStorage.removeItem(key);
+             //localStorage.removeItem(key);
+             getLocalStorage('token')
+             refreshToken();
              return "存储已过期";
          } else {
              var newValue = dataObj.val;
          }
          return newValue;
      } else {
+         getCode();
          return null;
      }
 };
-
 
 
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>周公解梦</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/OliveDreamInfo.css" />
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <span>梦见：</span>啊手机都快好快
+    </div>
+    <div class="titleBg">
+        <img src="../assets/images/icon/ODtitle.png">
+    </div>
+    <div class="main-bg"></div>
+    <div class="main">
+        <div class="mesLIst">
+            <p>阿萨德</p>
+            <span>点点滴滴大大说的撒的阿萨德就看你自己开车那句睡觉啊的空间</span>
+        </div>
+    </div>
+</div>
+<div class="bg"></div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            mesLIst:[]
+        },
+        created() {
+            getLocalStorage('token')
+        },
+        methods:{
+
+        },
+        mounted(){
+            var jsonParams = {"keyword": "牙"}
+            $.ajax({
+                url: baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
+                type: 'get',
+                dataType: 'json',
+                headers: {'Authorization': getLocalStorage('token')},
+                data: {
+                    jsonParams: JSON.stringify(jsonParams)
+                },
+                success: function (res) {
+                    console.log(JSON.parse(res.message))
+                    mesLIst = JSON.parse(res.message)
+                },
+            });
+        }
+    })
+</script>
+</html>
