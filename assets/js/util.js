@@ -64,7 +64,7 @@ function getCode(){
       code:getUrlParam('code')?getUrlParam('code'):'123456'
   };
   
-  if(!getLocalStorage('token')){
+  if(!getLocalStorage()){
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
@@ -156,7 +156,6 @@ function getLocalStorage(key) {
          }
          return newValue;
      } else {
-         getCode();
          return null;
      }
 };
