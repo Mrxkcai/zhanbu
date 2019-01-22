@@ -108,7 +108,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.08"></script>
+<script src="../assets/js/util.js?v=1.0.09"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
@@ -347,7 +347,7 @@
             //获取用户信息
             getUserInfo(){
                 var that = this;
-                Ajax.get(baseUrl + '/augury/small/program/api/user/info', function(res){
+                Ajax.get(baseUrl + 'augury/small/program/api/user/info', function(res){
                     var result = JSON.parse(res)
                     console.log(result)
                     if(result.code == 200){
