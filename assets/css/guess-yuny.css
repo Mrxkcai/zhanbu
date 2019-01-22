@@ -1,0 +1,60 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/icon/guess-bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.form-data{
+    width: 6.39rem;
+    height: 2.03rem;
+    background: url("../images/icon/form-bg.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 6.3rem auto 0;
+    /*display: -webkit-box;*/
+    /*-webkit-box-orient: vertical;*/
+}
+.form-data > div{
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    padding: 0 .33rem 0 .27rem;
+    box-sizing: border-box;
+}
+.form-data > div{
+    display: -webkit-box;
+    -webkit-box-pack: justify;
+}
+.form-data label{
+    display: block;
+    color: #963F3F;
+    font-size: .28rem;
+}
+.form-data p{
+    background: url("../images/icon/guess-arrw.png") no-repeat center right;
+    padding-right: .38rem;
+    background-size: .23rem .11rem;
+    font-size: .28rem;
+}
+.form-data > div:first-child{
+    background: url("../images/icon/gurss-line.png") no-repeat center bottom;
+    background-size: 100%;
+}
+
+.handleBar{
+    width: 5.85rem;
+    height: .76rem;
+    background:rgba(150,63,63,1);
+    border-radius: .38rem;
+    margin: 1.06rem auto 0;
+    text-align: center;
+    font-size: .3rem;
+    color: #F5E2E2;
+    line-height: .76rem;
+
+}

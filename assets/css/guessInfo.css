@@ -1,0 +1,64 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    background: url("../images/icon/guessInfo-bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.guess-date{
+    text-align: center;
+    padding-top: 1.14rem;
+}
+.guess-date >div:first-child{
+    padding-bottom: .36rem;
+    position: relative;
+}
+.guess-date >div:first-child:after{
+    content: '';
+    display: block;
+    width: .57rem;
+    height: .07rem;
+    background: #963F3F;
+    margin: 0.36rem auto 0;
+}
+.guess-date p{
+    color: #963F3F;
+    font-size: .28rem;
+    margin-bottom: .22rem;
+    font-weight:600;
+}
+.guess-date span{
+    display: block;
+    color: #333333;
+    font-size: .28rem;
+    font-weight:300;
+}
+
+.result{
+    width: 100%;
+    margin-top: 1.1rem;
+}
+.result img{
+    display: block;
+    width: 3.85rem;
+    margin: 0 auto;
+}
+.result-text{
+    width: 6rem;
+    height: 1.25rem;
+    background: url("../images/icon/bar-border.png") no-repeat;
+    background-size: 100% 100%;
+    font-size: .36rem;
+    text-align: center;
+    line-height: 1.25rem;
+    margin: .38rem auto 0;
+    font-weight: 600;
+}
+.result-text span{
+    color: #D7455B;
+}

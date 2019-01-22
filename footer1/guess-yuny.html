@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2019运势</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/guess-yuny.css" />
+    <link rel="stylesheet" href="../assets/css/iosSelect.css">
+    <link rel="stylesheet" href="../assets/css/util.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="form-data">
+        <div class="handleDate1" onclick="selectDates('.date-msg1')">
+            <label>女方怀孕日期（农历）</label>
+            <p class="date-msg1" :data-year="dataYear-10" :data-month="dataMonth" :data-date="dataDate"></p>
+        </div>
+        <div class="handleDate2" onclick="selectDates('.date-msg2')">
+            <label>女方出生日期（农历）</label>
+            <p class="date-msg2" :data-year="dataYear-10" :data-month="dataMonth" :data-date="dataDate">        </div>
+    </div>
+    <div class="handleBar" @click="handleResult">开始测试</div>
+</div>
+<div id="snackbar"></div>
+<!-- 消息提示 E-->
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/iosSelect.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            dataYear:'',
+            dataMonth:'',
+            dataDate:'',
+            dateMsg1:'',
+            dateMsg2:''
+        },
+        created(){
+            this.initDate()
+            getLocalStorage('token')
+        },
+        methods:{
+            initDate(){
+                // 初始化时间
+                var now = new Date();
+                this.dataYear = now.getFullYear();
+                this.dataMonth = now.getMonth() + 1;
+                this.dataDate = now.getDate();
+            },
+            handleResult(){
+                var that = this;
+
+                var jsonParams = {"pregnantDate":this.dateMsg1,"birthDate":this.dateMsg2};
+                $.ajax({
+                    url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
+                    type:'get',
+                    dataType:'json',
+                    headers: {'Authorization': getLocalStorage('token')},
+                    // async:false,
+                    data:{
+                        jsonParams:JSON.stringify(jsonParams)
+                    },
+                    success:function(res){
+                        console.log(res)
+                        if(res.code == 200){
+                            if(Number(res.message)>3){
+                                console.log(0)
+                                myFunction('snackbar','请选择正确的日期！');
+                                return false
+                            }else {
+                                console.log(that.dateMsg1)
+                                var pregnantDate = $('.date-msg1').text()
+                                var birthDate = $('.date-msg2').text()
+                                window.location.href = './guessInfo.html?message='+res.message+'&pregnantDate='+pregnantDate+'&birthDate='+birthDate
+                            }
+                        }else {
+                            myFunction('snackbar','请选择正确的日期！');
+                            return false
+                        }
+                    },
+                    error:function(){
+
+                    }
+                });
+            }
+        },
+        mounted(){
+
+        }
+    })
+</script>
+<script>
+    // 数据初始化
+    function formatYear (nowYear) {
+        var arr = [];
+        for (var i = nowYear - 200; i <= nowYear ; i++) {
+            arr.push({
+                id: i + '',
+                value: i + '年'
+            });
+        }
+        return arr;
+    }
+    function formatMonth () {
+        var arr = [];
+        for (var i = 1; i <= 12; i++) {
+            arr.push({
+                id: i + '',
+                value: i + '月'
+            });
+        }
+        return arr;
+    }
+    function formatDate (count) {
+        var arr = [];
+        for (var i = 1; i <= count; i++) {
+            arr.push({
+                id: i + '',
+                value: i + '日'
+            });
+        }
+        return arr;
+    }
+    var yearData = function(callback) {
+        callback(formatYear(vm.dataYear))
+    }
+    var monthData = function (year, callback) {
+        callback(formatMonth());
+    };
+    var dateData = function (year, month, callback) {
+        if (/^(1|3|5|7|8|10|12)$/.test(month)) {
+            callback(formatDate(31));
+        }
+        else if (/^(4|6|9|11)$/.test(month)) {
+            callback(formatDate(30));
+        }
+        else if (/^2$/.test(month)) {
+            if (year % 4 === 0 && year % 100 !==0 || year % 400 === 0) {
+                callback(formatDate(29));
+            }
+            else {
+                callback(formatDate(28));
+            }
+        }
+        else {
+            throw new Error('month is illegal');
+        }
+    };
+    function Appendzero(obj)
+    {
+        if(obj<10) return "0" +""+ obj;
+        else return obj;
+    }
+    function selectDates(showDateId){
+        var oneLevelId = $(showDateId).attr('data-year');
+        var twoLevelId = $(showDateId).attr('data-month');
+        var threeLevelId = $(showDateId).attr('data-date');
+        var showDateDom = $(showDateId)
+        console.log($(showDateId))
+        var iosSelect = new IosSelect(3,
+            [yearData, monthData, dateData],
+            {
+                title: '时间选择',
+                itemHeight: 35,
+                itemShowCount: 9,
+                oneLevelId: oneLevelId,
+                twoLevelId: twoLevelId,
+                threeLevelId: threeLevelId,
+                callback: function (selectOneObj, selectTwoObj, selectThreeObj) {
+                    showDateDom.attr('data-year', selectOneObj.id);
+                    showDateDom.attr('data-month', selectTwoObj.id);
+                    showDateDom.attr('data-date', selectThreeObj.id);
+                    showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value);
+
+                    var dataYear = selectOneObj.value.replace('年','');
+                    var dataMonth = Appendzero(selectTwoObj.value.replace('月',''))
+                    var dataDate = Appendzero(selectThreeObj.value.replace('日',''))
+
+                    if(showDateId == '.date-msg1'){
+                        vm.dateMsg1 = dataYear+dataMonth+dataDate
+                    }else {
+                        vm.dateMsg2 = dataYear+dataMonth+dataDate
+                    }
+                }
+            });
+    }
+
+</script>
+</html>
