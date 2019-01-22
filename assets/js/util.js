@@ -44,10 +44,14 @@ var Ajax={
       var xhr = new XMLHttpRequest();
       var boole;
       if(bool===false){boole = bool}else{boole = true}
+        // console.log(boole)
       xhr.open("POST", url, boole);
       // 添加http头，发送信息至服务器时内容编码类型
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
-      xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
+      if(getLocalStorage()){
+           xhr.setRequestHeader("Authorization", getLocalStorage('token'));  
+      }
+     
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
           fn.call(this, xhr.responseText);
@@ -63,12 +67,16 @@ function getCode(){
   var data = {
       code:getUrlParam('code')?getUrlParam('code'):'123456'
   };
-  
+  // return false
+
   if(!getLocalStorage()){
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
-        setLocalStorage('token', JSON.parse(res).data)
+        if(JSON.parse(res).code == 200){
+            setLocalStorage('token', JSON.parse(res).data)
+        }
+        
         // localStorage.setItem('token', JSON.parse(res).data)
     },false);
     
@@ -148,7 +156,6 @@ function getLocalStorage(key) {
          if(isTimed) {
              console.log("存储已过期");
              localStorage.removeItem(key);
-             
              return "存储已过期";
          } else {
              var newValue = dataObj.val;
