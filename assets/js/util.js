@@ -64,7 +64,7 @@ function getCode(){
       code:getUrlParam('code')?getUrlParam('code'):'123456'
   };
   
-  if(!getLocalStorage()){
+  if(!getLocalStorage('token')){
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
@@ -72,7 +72,7 @@ function getCode(){
         // localStorage.setItem('token', JSON.parse(res).data)
     },false);
     
-  }else if(getLocalStorage() == '存储已过期'){
+  }else if(getLocalStorage('token') == '存储已过期'){
       refreshToken()
   }
   
