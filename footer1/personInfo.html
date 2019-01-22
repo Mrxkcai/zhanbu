@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>个人基础信息</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.4/lib/index.css"> -->
+  <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
   <link rel="stylesheet" href="../assets/css/iosSelect.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/personInfo.css" />
   <script>
@@ -28,7 +28,7 @@
 
                 <div class="item item_name">
                         <div class="title">姓名</div> 
-                        <input type="text" placeholder="请填写姓名" />
+                        <input type="text" placeholder="请填写姓名" v-model='userInfo.name' maxlength="4" />
                 </div>
 
                 <div class="item item_name">
@@ -72,12 +72,15 @@
 
 
                 
-                <button class="seeLucky">查看个人运势</button>
+                <button class="seeLucky" @click='seeLucky()'>查看个人运势</button>
                 
             </div>
             
         </div>
         
+        <!-- 消息提示 S-->
+        <div id="snackbar"></div>
+        <!-- 消息提示 E-->
 
         <!-- <div class="vant_time_box" id="vant_time_box">
             <van-datetime-picker
@@ -107,7 +110,14 @@
             minDate: new Date(1970, 1, 1),
             maxDate: new Date(2119, 10, 1),
             currentDate: new Date(),
-            isPicker:false
+            isPicker:false,
+            userInfo:{
+                name:'',
+                hasLunar:false,
+                birthday:'',
+                sex:'',
+                birthTime:''
+            }
         },
         computed:{
 
@@ -116,9 +126,9 @@
             //选择公历还是农历
             selectTime(type){
                 if(type == 1){
-                    this.isTimeSelect = true;
+                    this.userInfo.hasLunar = false;
                 }else if(type == 2){
-                    this.isTimeSelect = false;
+                    this.userInfo.hasLunar = true;
                 }
             },
             //选择性别
@@ -141,6 +151,24 @@
             //     }
                 
             // }
+
+            //查看个人运势
+            seeLucky(){
+                var that = this;
+                console.log(that.userInfo)
+
+                if(that.userInfo.name == '' || that.userInfo.birthTime == '' || that.userInfo.birthday == ''){
+                    myFunction('snackbar','请填写完整信息');
+                }else{
+                    Ajax.post(baseUrl + '/augury/small/program/api/user/update', JSON.stringify(that.userInfo), function(res){
+                        console.log(JSON.parse(res))
+                        if(JSON.parse(res).code == 200){
+                            // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4b1be1d4635c2f&redirect_uri=https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect'
+                            window.location.href = 'https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html'
+                        }
+                    });
+                }
+            }
         },
         mounted(){
             document.getElementById('app').style.minHeight=window.innerHeight+'px';
@@ -247,6 +275,10 @@
                     showDateDom.attr('data-date', selectThreeObj.id);
                     showDateDom.attr('data-hour', selectFourObj.id);
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
+                
+                    //负值
+                    vm.userInfo.birthTime = selectFourObj.value;
+                    vm.userInfo.birthday = selectOneObj.id + '-' + selectTwoObj.id + '-' + selectThreeObj.id
                 }
         });
     });

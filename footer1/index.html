@@ -351,8 +351,15 @@
                     var result = JSON.parse(res)
                     console.log(result)
                     if(result.code == 200){
-                        that.userInfo.userName = result.data.nickname;
-                        setLocalStorage('userInfo', that.userInfo)
+                        if(result.data.birthday){
+                            that.tips = false;
+                            that.hasUserInfo = true;
+                        }else{
+                            that.tips = true;
+                            that.hasUserInfo = false;
+                        }
+                        // that.userInfo.userName = result.data.nickname;
+                        // setLocalStorage('userInfo', that.userInfo)
                     }
                 })
             }
@@ -366,14 +373,6 @@
 
             var elem = document.getElementById('userPercentNum');
                 elem.style.height = 0.0068 * this.userInfo.num + 'rem';
-
-            if(isUserInfo('userInfo')){
-                this.tips = false;
-                this.hasUserInfo = true;
-            }else{
-                this.tips = true;
-                this.hasUserInfo = false;
-            };
             
             //获取 CODE 方法
             getCode()
