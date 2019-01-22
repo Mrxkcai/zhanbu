@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2019运势</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/guessInfo.css" />
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="guess-date">
+        <div>
+            <p>女方怀孕日期（农历）</p>
+            <span>{{pregnantDate}}</span>
+        </div>
+        <div>
+            <p>女方出生日期（农历）</p>
+            <span>{{birthDate}}</span>
+        </div>
+    </div>
+    <div class="result">
+        <img src="../assets/images/icon/result.png"/>
+        <div class="result-text">
+            您怀的宝宝可能为：<span>{{baby}}</span>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            pregnantDate:'',
+            birthDate:'',
+            baby:''
+        },
+        created(){
+            var reg = new RegExp( ' ' , "g" )
+            this.pregnantDate = getUrlParam('pregnantDate').replace(reg,'')
+            this.birthDate = getUrlParam('birthDate').replace(reg,'')
+            switch (Number(getUrlParam('message'))) {
+                case 1:
+                    this.baby = '女孩';
+                    break;
+                case 2:
+                    this.baby = '男孩';
+                    break;
+                case 3:
+                    this.baby = '双胞胎';
+                    break;
+            }
+        },
+        methods:{
+            //1女 2男 3双胞胎
+        },
+        mounted(){
+
+        }
+    })
+</script>
+</html>
