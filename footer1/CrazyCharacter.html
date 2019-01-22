@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>八字算命</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-    <link rel="stylesheet" href="../assets/css/iosSelect.css">
+    <link rel="stylesheet" href="../assets/css/iosSelect.css?v=1.0.0">
     <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
     <link rel="stylesheet" type="text/css" href="../assets/css/CrazyCharacter.css?v=1.0.10" />
     <script>
@@ -151,7 +151,7 @@
     var nowYear = now.getFullYear();
     var nowMonth = now.getMonth() + 1;
     var nowDate = now.getDate();
-    showDateDom.attr('data-year', nowYear);
+    showDateDom.attr('data-year', nowYear-29);
     showDateDom.attr('data-month', nowMonth);
     showDateDom.attr('data-date', nowDate);
     // 数据初始化
@@ -218,13 +218,28 @@
             //  ,
             // '12', '13', '14', '15', '16', '17',
             // '18', '19', '20', '21', '22', '23'
-            ]
+            ];
+        var timeInterval = [
+            '(23:00～1:00)','(1:00～3:00)','(3:00～5:00)',
+            '(5:00～7:00)','(7:00～9:00)','(9:00～11:00)',
+            '(11:00～13:00)','(13:00～15:00)','(15:00～17:00)',
+            '(17:00～19:00)','(19:00～21:00)','(21:00～23:00)'
+        ];
+
         for (var i = 0; i < hourList.length; i++) {
             hours.push({
                 id: i,
-                value: hourList[i] + '时'
+                value: hourList[i] + '时' + timeInterval[i]
             });
         }
+
+        // for(var i = 0; i < timeInterval.length; i ++){
+        //     hours.push({
+        //         id: i,
+        //         value: hourList[i] + '时' + timeInterval[i]
+        //     });
+        // }
+
         callback(hours);
     };
     selectDateDom.bind('click', function () {
@@ -247,6 +262,8 @@
                     showDateDom.attr('data-month', selectTwoObj.id);
                     showDateDom.attr('data-date', selectThreeObj.id);
                     showDateDom.attr('data-hour', selectFourObj.id);
+                    document.getElementsByClassName('select_box')[0].classList.add('change-select_box');
+                    document.getElementById('selectDate').classList.add('change-item-line');
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
                     //付值
                     
