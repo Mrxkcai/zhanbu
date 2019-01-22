@@ -57,12 +57,13 @@ var Ajax={
     }
 };
 
+
 //获取 CODE;
 function getCode(){
   var data = {
       code:getUrlParam('code')?getUrlParam('code'):'123456'
   };
-
+  
   if(!getLocalStorage()){
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
