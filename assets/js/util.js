@@ -156,7 +156,6 @@ function getLocalStorage(key) {
          }
          return newValue;
      } else {
-         getCode();
          return null;
      }
 };
