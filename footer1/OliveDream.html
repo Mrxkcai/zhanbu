@@ -11,9 +11,9 @@
 <div id="app" v-cloak>
     <div class="main">
         <div class="input-box">
-            <input type="text" placeholder="请输入">
+            <input type="text" placeholder="请输入" v-model="values">
         </div>
-        <div class="handleBar"></div>
+        <div class="handleBar" @click="handleBar"></div>
     </div>
 </div>
 <div class="bg"></div>
@@ -25,10 +25,12 @@
     var vm = new Vue({
         el:'#app',
         data:{
-
+            values:''
         },
         methods:{
-
+            handleBar(){
+                window.location.href = './OliveDreamInfo.html?values='+ this.values+'&id='+getUrlParam('id')
+            }
         },
         mounted(){
 

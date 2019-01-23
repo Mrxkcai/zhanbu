@@ -10,16 +10,16 @@
 <body>
 <div id="app" v-cloak>
     <div class="header">
-        <span>梦见：</span>啊手机都快好快
+        <span>梦见：</span>{{mes}}
     </div>
     <div class="titleBg">
         <img src="../assets/images/icon/ODtitle.png">
     </div>
     <div class="main-bg"></div>
     <div class="main">
-        <div class="mesLIst">
-            <p>阿萨德</p>
-            <span>点点滴滴大大说的撒的阿萨德就看你自己开车那句睡觉啊的空间</span>
+        <div class="mesLIst" v-for="item in mesLIst">
+            <p>{{item.desc}}</p>
+            <span v-for="items in item.list">{{items}}</span>
         </div>
     </div>
 </div>
@@ -32,16 +32,19 @@
     var vm = new Vue({
         el:'#app',
         data:{
-            mesLIst:[]
+            mesLIst:[],
+            mes:''
         },
         created() {
-            getLocalStorage('token')
+            getLocalStorage('token');
+            this.mes = getUrlParam('values')
         },
         methods:{
 
         },
         mounted(){
-            var jsonParams = {"keyword": "牙"}
+            var that = this;
+            var jsonParams = {"keyword": getUrlParam('values')}
             $.ajax({
                 url: baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
                 type: 'get',
@@ -52,7 +55,8 @@
                 },
                 success: function (res) {
                     console.log(JSON.parse(res.message))
-                    mesLIst = JSON.parse(res.message)
+                    that.mesLIst = JSON.parse(res.message)
+                    //console.log(res)
                 },
             });
         }

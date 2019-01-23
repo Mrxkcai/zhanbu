@@ -204,6 +204,8 @@
                             window.location.href = './guess-yuny.html?id=' + this.categoryId;
                         }else if(res.data[0].name == "2019运势查询接口"){
                             window.location.href = './FortuneLIst.html'
+                        }else if(res.data[0].name == "周公解梦查询接口"){
+                            window.location.href = './OliveDream.html?id=' + this.categoryId;
                         }
                         
                     }else{
@@ -384,7 +386,6 @@
 
             // var elem = document.getElementById('userPercentNum');
             //     elem.style.height = 0.0068 * this.userInfo.num + 'rem';
-            
             //获取 CODE 方法
             getCode()
 
