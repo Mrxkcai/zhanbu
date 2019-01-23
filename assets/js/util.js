@@ -63,8 +63,8 @@ var Ajax={
 //获取 CODE;
 function getCode(){
   var data = {
-       code:getUrlParam('code')?getUrlParam('code'):'123456'
-    //code:getUrlParam('code')
+       //code:getUrlParam('code')?getUrlParam('code'):'123456'
+    code:getUrlParam('code')
   };
   
   if(!getLocalStorage('token')){
