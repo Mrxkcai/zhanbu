@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>命理测算</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.03" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.04" />
   <link rel="stylesheet" href="../assets/component/footer/footer.css">
 </head>
 <body>
@@ -20,19 +20,19 @@
         </header>
 
         <!-- 用户详情 -->
-        <div class="userInfo" v-show='hasUserInfo'>
+        <div class="userInfo" v-show='hasUserInfo' @click='showEveryDay()'>
             <img class="userImg" :src="userInfo.userImg" alt="">
             <div class="userDetail">
                 <p>{{userInfo.userName}}</p>
-                <p>(农历）{{userInfo.birth}}</p>
+                <p>{{userInfo.birth}}</p>
             </div>
 
             <div class="userPercent">
-                <div class="userPercentBox">
+                <!-- <div class="userPercentBox">
                     <div class="userPercentNum" id="userPercentNum"></div>
                     <p>{{changeValue}}%</p>
-                </div>
-                <p>综合运势</p>
+                </div> -->
+                <!-- <p>233</p> -->
             </div>
             <img class="right_arrow" src="../assets/images/icon/right_arrow.png" alt="">
         </div>
@@ -108,7 +108,7 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.11"></script>
+<script src="../assets/js/util.js?v=1.0.14"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
@@ -354,6 +354,11 @@
                         if(result.data.birthday){
                             that.tips = false;
                             that.hasUserInfo = true;
+                            that.userInfo.userName = result.data.nickname
+                            that.userInfo.userImg = result.data.head
+                            var txt = result.data.hasLunar == true?'农历':'公历'
+                            that.userInfo.birth = '(' + txt + ') ' + result.data.birthday + ' ' + result.data.birthTime
+                            localStorage.setItem('userInfo', JSON.stringify(result.data))
                         }else{
                             that.tips = true;
                             that.hasUserInfo = false;
@@ -362,6 +367,12 @@
                         // setLocalStorage('userInfo', that.userInfo)
                     }
                 })
+            },
+
+            //每日运势
+            showEveryDay(){
+                var that = this;
+                window.location.href = 'everyDay.html'
             }
             
         },
@@ -371,8 +382,8 @@
             this.$refs.footer.footerList[0].active=true;
             this.$refs.footer.footerList[0].img = 'shyeselect.png';
 
-            var elem = document.getElementById('userPercentNum');
-                elem.style.height = 0.0068 * this.userInfo.num + 'rem';
+            // var elem = document.getElementById('userPercentNum');
+            //     elem.style.height = 0.0068 * this.userInfo.num + 'rem';
             
             //获取 CODE 方法
             getCode()

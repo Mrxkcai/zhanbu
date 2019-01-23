@@ -23,10 +23,12 @@ var baseImgUrl = 'https://wxcs.nuoweibd.com/statics';
 
 	
 var Ajax={
-    get: function(url, fn) {
+    get: function(url, fn, bool) {
       // XMLHttpRequest对象用于在后台与服务器交换数据   
-      var xhr = new XMLHttpRequest();        
-      xhr.open('GET', url, true);
+      var xhr = new XMLHttpRequest();   
+      var boole;
+      if(bool===false){boole = bool}else{boole = true}     
+      xhr.open('GET', url, boole);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");  
       console.log(getLocalStorage('token'))
       xhr.setRequestHeader("Authorization", getLocalStorage('token'));
@@ -61,7 +63,8 @@ var Ajax={
 //获取 CODE;
 function getCode(){
   var data = {
-      code:getUrlParam('code')?getUrlParam('code'):'123456'
+    //   code:getUrlParam('code')?getUrlParam('code'):'123456'
+    code:getUrlParam('code')
   };
   
   if(!getLocalStorage('token')){
@@ -72,8 +75,12 @@ function getCode(){
         // localStorage.setItem('token', JSON.parse(res).data)
     },false);
     
-  }else if(getLocalStorage('token') == '存储已过期'){
-      refreshToken()
+  }
+//   else if(getLocalStorage('token') == '存储已过期'){
+//     //   refreshToken()
+//   }
+  else{
+    getLocalStorage('token')    
   }
   
   
@@ -81,14 +88,15 @@ function getCode(){
 
 
 //刷新token方法
-function refreshToken(){
-  var token = localStorage.getItem('token');
-  console.log(token)
+function refreshToken(data){
+//   var token = localStorage.getItem('token');
+//   console.log(token.val)
 
-  Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + token, function(res){
+  Ajax.get(baseUrl + 'auth/jwt/refresh' + "?" + data, function(res){
       console.log(JSON.parse(res))
       setLocalStorage('token', JSON.parse(res).data)
-  });
+      window.location.reload();
+  },false);
 };
 
 // refreshToken()
@@ -147,9 +155,10 @@ function getLocalStorage(key) {
          var isTimed = (new Date().getTime() - dataObj.timer) > exp;
          if(isTimed) {
              console.log("存储已过期");
-             //localStorage.removeItem(key);
-             getLocalStorage('token')
-             refreshToken();
+             localStorage.removeItem(key);
+            //  getLocalStorage('token')
+             refreshToken(dataObj.val);
+            // getCode()
              return "存储已过期";
          } else {
              var newValue = dataObj.val;

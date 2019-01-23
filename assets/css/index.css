@@ -81,12 +81,15 @@ header button{
 .userPercent{
   display: flex;
   flex-direction: column;
-  margin-left:1.4rem; 
+  /* margin-left:1.4rem;  */
+  width: 2.7rem;
 }
 .userPercent p{
-  text-align: center;
+  /* text-align: center; */
+  text-indent: 1em;
   color: #ffffff;
   line-height: .4rem;
+  margin: .3rem 0 0 0;
 }
 .userPercentBox{
   width: .68rem;

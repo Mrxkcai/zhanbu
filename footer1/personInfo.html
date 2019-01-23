@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
   <link rel="stylesheet" href="../assets/css/iosSelect.css">
-  <link rel="stylesheet" type="text/css" href="../assets/css/personInfo.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/personInfo.css?v=1.0.0" />
   <script>
     var _hmt = _hmt || [];
     (function() {
@@ -115,7 +115,7 @@
                 name:'',
                 hasLunar:false,
                 birthday:'',
-                sex:'',
+                sex:'1',
                 birthTime:''
             }
         },
@@ -135,8 +135,10 @@
             selectSex(type){
                 if(type == 1){
                     this.isSexSelect = true;
+                    this.sex = 1
                 }else if(type == 2){
                     this.isSexSelect = false;
+                    this.sex = 0
                 }
             },
             //选择出生日期
@@ -160,11 +162,11 @@
                 if(that.userInfo.name == '' || that.userInfo.birthTime == '' || that.userInfo.birthday == ''){
                     myFunction('snackbar','请填写完整信息');
                 }else{
-                    Ajax.post(baseUrl + '/augury/small/program/api/user/update', JSON.stringify(that.userInfo), function(res){
+                    Ajax.post(baseUrl + 'augury/small/program/api/user/update', JSON.stringify(that.userInfo), function(res){
                         console.log(JSON.parse(res))
                         if(JSON.parse(res).code == 200){
-                            // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4b1be1d4635c2f&redirect_uri=https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect'
-                            window.location.href = 'https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html'
+                            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4b1be1d4635c2f&redirect_uri=https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect'
+                            // window.location.href = 'https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html'
                         }
                     });
                 }

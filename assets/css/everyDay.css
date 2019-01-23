@@ -20,3 +20,30 @@
     height: .8rem;
     margin: .8rem auto 0;
 }
+.basic-info{
+    font-size:.28rem;
+    font-family:PingFangSC-Semibold;
+    font-weight:600;
+    display: inline-block;
+    margin-left: .6rem;
+    margin-top: .3rem;
+    color:rgba(168,33,49,1);
+    margin-bottom: .3rem;
+}
+.detail-txt{
+    font-size:.24rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    margin-left: .6rem;
+    line-height: .4rem;
+}
+.fgline{
+    width: 4rem;
+    display: block;
+    margin: .3rem auto .3rem;
+}
+.detail-auto{
+    width: 5.5rem;
+    margin: 0 auto 1rem;
+}
