@@ -1,9 +1,12 @@
 #app{
-  position: relative;
+  position: fixed;
+  width: 100%;
   /* background: url('../images/icon/back.jpg'); */
   background: #F9F3ED;
   background-size:100% 100%; 
   overflow: hidden;
+  top: 0;
+  left: 0;
 }
 [v-cloak]{
   display: none;
@@ -53,6 +56,7 @@ header button{
   left: 0;
   display: flex;
   flex-direction: row;
+  z-index: 9;
 }
 .userImg{
   width: .84rem;
@@ -269,7 +273,9 @@ header button{
   border: 1px solid #F0DAC7;
 }
 
-
+.none{
+  opacity: 0;
+}
 .popular_remen{
   
 }

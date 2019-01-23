@@ -127,8 +127,10 @@
             selectTime(type){
                 if(type == 1){
                     this.userInfo.hasLunar = false;
+                    this.isTimeSelect = true
                 }else if(type == 2){
                     this.userInfo.hasLunar = true;
+                    this.isTimeSelect = false
                 }
             },
             //选择性别
@@ -158,7 +160,7 @@
             seeLucky(){
                 var that = this;
                 console.log(that.userInfo)
-
+                // debugger
                 if(that.userInfo.name == '' || that.userInfo.birthTime == '' || that.userInfo.birthday == ''){
                     myFunction('snackbar','请填写完整信息');
                 }else{

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>星座配对</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/aries.css" />
+    <link rel="stylesheet" href="../assets/css/util.css?v=1.0.01">
+</head>
+<body>
+<div id="app" v-cloak>
+    <div v-show='isDetails'>
+        <img src="../assets/images/marrage/xz-title.png" class="xz-title" alt="">
+        <div class="main">
+            
+            <div class="left_aries">
+                <div>
+                    <select name="" class="select" id="aries-one">
+                        <option value="">白羊座</option>
+                        <option value="">金牛座</option>
+                        <option value="">双子座</option>
+                        <option value="">巨蟹座</option>
+                        <option value="">狮子座</option>
+                        <option value="">处女座</option>
+                        <option value="">天秤座</option>
+                        <option value="">天蝎座</option>
+                        <option value="">射手座</option>
+                        <option value="">摩羯座</option>
+                        <option value="">水瓶座</option>
+                        <option value="">双鱼座</option>
+                    </select>
+                </div>
+            </div>
+
+            <img src="../assets/images/marrage/xz-pei.png" class="word-pei" alt="">
+
+            <div class="right_aries">
+                <div>
+                    <select name="" class="select" id="aries-two">
+                        <option value="">白羊座</option>
+                        <option value="">金牛座</option>
+                        <option value="">双子座</option>
+                        <option value="">巨蟹座</option>
+                        <option value="">狮子座</option>
+                        <option value="">处女座</option>
+                        <option value="">天秤座</option>
+                        <option value="">天蝎座</option>
+                        <option value="">射手座</option>
+                        <option value="">摩羯座</option>
+                        <option value="">水瓶座</option>
+                        <option value="">双鱼座</option>
+                    </select>
+                </div>
+            </div>
+            <p style="clear: both;"></p>
+
+
+            <div class="start_aries" @click='startAries()'>
+                配对分析
+            </div>
+        </div>
+    </div>
+
+
+    <div v-show='!isDetails'>
+        <img src="../assets/images/marrage/xz-supei.png" class="xz-supei" alt="">
+        <p class="xingzuo">{{message.peiDuiResult.title}}</p>
+
+        <div class="xz-details">
+            <div class="jiexi">
+                    解析
+            </div>
+
+            <div class="xz-item">
+                <div></div>
+                <div>速配指数：</div>
+                <div>{{message.peiDuiResult.score}}</div>
+                <p style="clear: both;"></p>
+            </div>
+
+            <div class="xz-item">
+                <div></div>
+                <div>速配比重：</div>
+                <div>{{message.peiDuiResult.proportion}}</div>
+                <p style="clear: both;"></p>
+            </div>
+
+            <div class="xz-item">
+                <div></div>
+                <div>速配分析：</div>
+                <div class="supei-result">{{message.peiDuiResult.result}}</div>
+                <p style="clear: both;"></p>
+            </div>
+
+            <div class="xz-item">
+                <div></div>
+                <div>注意事项：</div>
+                <div class="supei-result">{{message.peiDuiResult.attention}}</div>
+                <p style="clear: both;"></p>
+            </div>
+    
+    
+
+        </div>
+    </div>
+
+     <!-- 消息提示 S-->
+     <div id="snackbar"></div>
+     <!-- 消息提示 E-->
+
+</div>
+<div class="bg"></div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../assets/js/zepto.js"></script>
+<script src="../assets/js/util.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'',
+            aries1:'白羊座',
+            aries2:'白羊座',
+            isDetails:true,
+            message:{
+                peiDuiResult:{
+                    attention:'',
+                    proportion:'',
+                    result:'',
+                    score:'',
+                    title:''
+                },
+                xingZuoResult1:{
+                    appropriate:'',
+                    appropriateResult:'',
+                    appropriateScore:'',
+                    inappropriate:'',
+                    inappropriateResult:'',
+                    inappropriateScore:'',
+                    introduce:'',
+                    title:''
+                },
+                xingZuoResult2:{
+                    appropriate:'',
+                    appropriateResult:'',
+                    appropriateScore:'',
+                    inappropriate:'',
+                    inappropriateResult:'',
+                    inappropriateScore:'',
+                    introduce:'',
+                    title:''
+                }
+            }
+        },
+        created(){
+            
+        },
+        methods:{
+            init(){
+
+            },
+            startAries(){
+                var that = this;
+                var obj = document.getElementById('aries-one');
+                var obj2 = document.getElementById('aries-two');
+                var index = obj.selectedIndex; // 选中索引
+                var text = obj.options[index].text; // 选中文本
+
+                var index2 = obj2.selectedIndex; // 选中索引
+                var text2 = obj2.options[index2].text; // 选中文本
+                that.aries1 = text
+                that.aries2 = text2
+                var data = {
+                    constellation1:that.aries1,
+                    constellation2:that.aries2
+                }
+
+                console.log(data)
+                $.ajax({
+                    type:'get',
+                    url:baseUrl + 'augury/small/program/api/augury/info/' + getUrlParam('id'),
+                    data:{
+                        jsonParams:JSON.stringify(data)
+                    },
+                    headers: {'Authorization': getLocalStorage('token')},
+                    success:function(res){
+                        
+                        if(res.code == 200){
+                            if(res.message == null){
+                                myFunction('snackbar','为查询到结果');
+                            }else{
+                                that.message = JSON.parse(res.message)
+                                that.isDetails = false
+                                console.log(that.message)
+                            }
+                        }
+                    }
+                })
+            }
+        },
+        mounted(){
+            document.getElementById('app').style.minHeight = window.innerHeight + 'px';
+            //调用获取 token 的方法
+            getLocalStorage('token')
+            this.init();
+        }
+    })
+</script>
+</html>

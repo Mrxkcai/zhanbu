@@ -23,8 +23,24 @@
 <body>
     <div id="app" v-cloak>
         <div class="toggleBlock" v-show='!dataInfo'>
+            <div class="item item_name">
+                    <div class="title">选择年份</div> 
+                    <div class="timeBox">
+                        <div class="chooseGong" @click="selectTime(1)">
+                            <div :class="{timeSelect:isTimeSelect}"></div>
+                            <span>公历</span>
+                        </div>
+                        <div class="chooseNong" @click="selectTime(2)">
+                            <div :class='{timeSelect:!isTimeSelect}'></div>
+                            <span>农历</span>
+                        </div>
+                    </div>
+                    
+            </div>
+
+
             <div class="select_box">
-                <div class="title">阳历出生日期</div>
+                <div class="titley">阳历出生日期</div>
                 <div class="form-item item-line" id="selectDate">
                     <div class="pc-box">
                         <span data-year="" data-month="" data-date="" id="showDate">请选择您的出生日期</span>
@@ -77,15 +93,31 @@
         data: {
             dataInfo: false,        //是否填写信息
             id:null,                //url中获取参数
-            characterInfo:null,     //填写的信息
+            isTimeSelect:true,
+            isSexSelect:true,
+            characterInfo:{
+                data:'',
+                hour:'',
+                hasLunar:false
+            },     //填写的信息
             dataResult:null
         },
         computed:{},
         methods: {
+            //选择公历还是农历
+            selectTime(type){
+                if(type == 1){
+                    this.characterInfo.hasLunar = false;
+                    this.isTimeSelect = true
+                }else if(type == 2){
+                    this.characterInfo.hasLunar = true;
+                    this.isTimeSelect = false
+                }
+            },
             characterCurrently(){
                 // console.log(this.characterInfo)
                 var that = this;
-                if(this.characterInfo == null){
+                if(this.characterInfo.data == ''){
                     myFunction('snackbar','请选择您的出生日期');
                     return false
                 };

@@ -7,7 +7,7 @@
 .select_box{
     width: 6.01rem;
     height: 1.6rem;
-    margin: 5.5rem auto 0;
+    margin: .2rem auto 0;
     background: url('../images/marrage/Character_border.png');
     background-size: 100% 100%;
 }
@@ -17,7 +17,7 @@
 .change-item-line{
     margin: -.6rem 0 0 .5rem!important;
 }
-.title{
+.titley{
     display: inline-block;
     line-height: 1.5rem;
     margin-left: .5rem;
@@ -95,3 +95,101 @@
     transition: opacity .5s;
 }
 
+
+
+
+
+
+
+
+.item{
+    width: 6.01rem;
+    height: 1.6rem;
+    /* border-bottom: 1px solid #D8AF6B; */
+    margin: 5rem auto 0;
+    background: url(../images/marrage/Character_border.png);
+    background-size: 100% 100%;
+}
+.item_name{
+    /* display: flex;
+    flex-direction: row; */
+    overflow: hidden;
+}
+.title::after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.item_name .title{
+    display: block;
+    min-width: 1.2rem;
+    float: left;
+    font-size:.3rem;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(209,142,83,1);
+  line-height: 1.32rem;
+  text-align: justify;
+  margin-left: .5rem;
+}
+.item_name input{
+  width: 3.5rem;
+  float: left;
+  line-height: .4rem;
+  margin-left: .58rem;
+  outline: none;
+  border: none;
+  margin-top: .5rem;
+  font-size: .3rem;
+}
+.item_name input::placeholder{
+  font-size:.3rem;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(163,161,161,1);
+}
+.timeBox{
+
+    display: flex;
+    flex-direction: row;
+  }
+  .chooseGong,.chooseNong{
+    line-height: 1.3rem;
+    font-size:.3rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(51,51,51,1);
+}
+.chooseGong>div{
+width: .28rem;
+height: .28rem;
+border-radius: 50%;
+background: url('../images/icon/edit_unselect.png');
+background-size: 100% 100%;
+vertical-align: middle;
+float: left;
+margin: .5rem .2rem 0 .58rem;
+}
+.chooseGong>span{
+display: inline-block;
+float: left;
+}
+.chooseNong>div{
+width: .28rem;
+height: .28rem;
+border-radius: 50%;
+background: url('../images/icon/edit_unselect.png');
+background-size: 100% 100%;
+vertical-align: middle;
+float: left;
+margin: .5rem .2rem 0 .58rem;
+}
+.chooseNong>span{
+display: inline-block;
+float: left;
+}
+
+.item_name .timeSelect{
+    background: url('../images/icon/edit_choose.png');
+    background-size: 100% 100%;
+}

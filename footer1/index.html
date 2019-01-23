@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>命理测算</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.04" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/index.css?v=1.0.05" />
   <link rel="stylesheet" href="../assets/component/footer/footer.css">
 </head>
 <body>
@@ -86,7 +86,7 @@
                     <tr v-for='item,index in popularerweiArr'>
                         <td v-for='list,index in item' @click='toDetailPage(list.id)'>
                             <div class="popular_hot_title">
-                                <img :src="list.picUrl?list.picUrl:''" alt="">
+                                <img :src="list.picUrl?list.picUrl:''" :class='{none:!list.picUrl}' alt="">
                                 <span>{{list.name}}</span>
                             </div>
                         </td>
@@ -108,13 +108,13 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../static/js/vue.min.js"></script>
 <script src="../assets/component/footer/footer.js"></script>
-<script src="../assets/js/util.js?v=1.0.14"></script>
+<script src="../assets/js/util.js?v=1.0.15"></script>
 <script src="../assets/js/zepto.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
         data:{
-            tips:true,  //是否填写信息
+            tips:false,  //是否填写信息
             hasUserInfo:false, //是否展示个人信息
             isUp:true,  //向上
             popularTitle:null,
@@ -179,7 +179,6 @@
             toDetailPage(id){
                 Ajax.get(baseUrl + 'augury/small/program/api/augury/list/' + id, function(res){
                     var res = JSON.parse(res)
-                    console.log(res)
                     if(res.code == 200){
                         console.log(res)
                         
@@ -206,6 +205,8 @@
                             window.location.href = './FortuneLIst.html'
                         }else if(res.data[0].name == "周公解梦查询接口"){
                             window.location.href = './OliveDream.html?id=' + this.categoryId;
+                        }else if(res.data[0].name == "星座配对查询接口"){
+                            window.location.href = './aries.html?id=' + this.categoryId;
                         }
                         
                     }else{
@@ -380,7 +381,7 @@
         },
         mounted(){
             
-            document.getElementById('app').style.minHeight=window.innerHeight+'px';
+            document.getElementById('app').style.height=window.innerHeight+'px';
             this.$refs.footer.footerList[0].active=true;
             this.$refs.footer.footerList[0].img = 'shyeselect.png';
 

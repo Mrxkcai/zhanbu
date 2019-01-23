@@ -5,23 +5,26 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>每日运势</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/everyDay.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/everyDay.css?v=1.0.02" />
+    <style>
+        [v-cloak]{display: none;}
+    </style>
 </head>
 <body>
 <div id="app" v-cloak>
     <div class="everyDay">
         <img src="../assets/images/yunshi/fxjg.png" class="fengexian" alt="">
         <span class="basic-info">基本信息</span>
-        <p class="detail-txt">章三， 男</p>
-        <p class="detail-txt">1957年1月23日0时分 星期二</p>
-        <p class="detail-txt">辛未年八月初十巳时</p>
-        <p class="detail-txt">属羊</p>
-        <p class="detail-txt">处女座</p>
+        <p class="detail-txt">{{userInfo.basicInfo}}</p>
+        <p class="detail-txt">{{userInfo.birthday}}</p>
+        <p class="detail-txt">{{userInfo.birthdayOfChina}}</p>
+        <p class="detail-txt">{{userInfo.chineseZodiac}}</p>
+        <p class="detail-txt">{{userInfo.constellation}}</p>
 
         <img src="../assets/images/yunshi/fgline.png" class="fgline" alt="">
 
         <span class="basic-info">分析结果</span>
-        <p class="detail-auto">离命（在您居住的房屋中，您的本命财位在 东方。）</p>
+        <p class="detail-auto">{{userInfo.life}}</p>
     </div>
 </div>
 <div class="bg"></div>
@@ -34,7 +37,15 @@
         el:'#app',
         data:{
             msg:'',
-            userInfo:null
+            userInfo:{
+                "basicInfo":"",
+                "birthday":" ",
+                "birthdayOfChina":"",
+                "chineseZodiac":"",
+                "constellation":"",
+                "life":" ",
+                "lifeBuddha":""
+            }
         },
         created(){
             
@@ -47,7 +58,7 @@
                 
                 var params = {
                     "dataType":"1","year":"1957","month":"12","day":"12",
-                    "hour":"","minute":"","pid":"","cid":"",
+                    "hour":"","minute":"0","pid":"","cid":"",
                     "name":"","sex":""
                 };
 
@@ -57,7 +68,7 @@
                     params.dataType = '0'
                 }
                 
-                // params.year = jsonParams.birthday.split('-')[0]
+                params.year = jsonParams.birthday.split('-')[0]
                 params.month = jsonParams.birthday.split('-')[1]
                 params.day = jsonParams.birthday.split('-')[2]
                 params.name = jsonParams.nickname
@@ -103,11 +114,11 @@
                     },
                     headers: {'Authorization': getLocalStorage('token')},
                     success:function(res){
-                        
+                        console.log(res)
                         if(res.code == 200){
                             
                             that.userInfo = JSON.parse(res.message).userInfo
-                            console.log(that.userInfo)
+                            
                             localStorage.setItem('detail', JSON.stringify(that.userInfo.userInfo))
                         }
                     }

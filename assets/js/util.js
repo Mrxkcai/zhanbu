@@ -62,6 +62,9 @@ var Ajax={
 
 //获取 CODE;
 function getCode(){
+    if(!getUrlParam('code')){
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4b1be1d4635c2f&redirect_uri=https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect'
+    }
   var data = {
        //code:getUrlParam('code')?getUrlParam('code'):'123456'
     code:getUrlParam('code')
@@ -71,7 +74,12 @@ function getCode(){
     //传餐数据是json格式
     Ajax.post(baseUrl + 'auth/jwt/token', JSON.stringify(data), function(res){
         console.log(JSON.parse(res))
-        setLocalStorage('token', JSON.parse(res).data)
+        if(JSON.parse(res).code == 200){
+            setLocalStorage('token', JSON.parse(res).data)
+        }else{
+            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4b1be1d4635c2f&redirect_uri=https://wxcs.nuoweibd.com/statics/zhanbu/footer1/index.html&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect'
+        }
+        
         // localStorage.setItem('token', JSON.parse(res).data)
     },false);
     
