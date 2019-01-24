@@ -55,7 +55,7 @@
 
         <div v-show='dataInfo' class="dataInfo toggleBlock">
             <div>
-                <span class="select_title">阴历出生日期</span>
+                <span class="select_title">出生日期</span>
                 <span class="select_bir">{{dataResult&&dataResult.lunar}}</span>
             </div>
             <div>
@@ -96,7 +96,7 @@
             isTimeSelect:true,
             isSexSelect:true,
             characterInfo:{
-                data:'',
+                date:'',
                 hour:'',
                 hasLunar:false
             },     //填写的信息
@@ -117,7 +117,7 @@
             characterCurrently(){
                 // console.log(this.characterInfo)
                 var that = this;
-                if(this.characterInfo.data == ''){
+                if(that.characterInfo.date == ''){
                     myFunction('snackbar','请选择您的出生日期');
                     return false
                 };
@@ -299,10 +299,10 @@
                     showDateDom.html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value + ' ' + selectFourObj.value);
                     //付值
                     
-                    vm.characterInfo = {
-                        date:selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id) ,
-                        hour:(selectFourObj.id * 2).toString()
-                    }
+                    
+                    vm.characterInfo.date = selectOneObj.id + '-' + tranformTow(selectTwoObj.id) + '-' + tranformTow(selectThreeObj.id) ,
+                    vm.characterInfo.hour = (selectFourObj.id * 2).toString()
+                    
 
                     // console.log(vm.characterInfo)
 
